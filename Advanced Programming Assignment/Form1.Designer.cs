@@ -29,22 +29,15 @@ namespace Advanced_Programming_Assignment
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBoxInput = new System.Windows.Forms.TextBox();
             this.btnRun = new System.Windows.Forms.Button();
             this.btnCheck = new System.Windows.Forms.Button();
             this.panelGraphics = new System.Windows.Forms.Panel();
+            this.txtInput = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // textBoxInput
-            // 
-            this.textBoxInput.Location = new System.Drawing.Point(12, 411);
-            this.textBoxInput.Name = "textBoxInput";
-            this.textBoxInput.Size = new System.Drawing.Size(576, 27);
-            this.textBoxInput.TabIndex = 0;
             // 
             // btnRun
             // 
-            this.btnRun.Location = new System.Drawing.Point(594, 410);
+            this.btnRun.Location = new System.Drawing.Point(12, 409);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(94, 29);
             this.btnRun.TabIndex = 1;
@@ -53,7 +46,7 @@ namespace Advanced_Programming_Assignment
             // 
             // btnCheck
             // 
-            this.btnCheck.Location = new System.Drawing.Point(694, 410);
+            this.btnCheck.Location = new System.Drawing.Point(291, 409);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(94, 29);
             this.btnCheck.TabIndex = 2;
@@ -62,21 +55,29 @@ namespace Advanced_Programming_Assignment
             // 
             // panelGraphics
             // 
-            this.panelGraphics.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.panelGraphics.Location = new System.Drawing.Point(12, 4);
+            this.panelGraphics.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelGraphics.Location = new System.Drawing.Point(391, 4);
             this.panelGraphics.Name = "panelGraphics";
-            this.panelGraphics.Size = new System.Drawing.Size(776, 400);
+            this.panelGraphics.Size = new System.Drawing.Size(397, 400);
             this.panelGraphics.TabIndex = 3;
+            // 
+            // txtInput
+            // 
+            this.txtInput.Location = new System.Drawing.Point(13, 4);
+            this.txtInput.Multiline = true;
+            this.txtInput.Name = "txtInput";
+            this.txtInput.Size = new System.Drawing.Size(372, 400);
+            this.txtInput.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtInput);
             this.Controls.Add(this.panelGraphics);
             this.Controls.Add(this.btnCheck);
             this.Controls.Add(this.btnRun);
-            this.Controls.Add(this.textBoxInput);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -85,11 +86,10 @@ namespace Advanced_Programming_Assignment
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox textBoxInput;
         private System.Windows.Forms.Button btnRun;
         private System.Windows.Forms.Button btnCheck;
         private System.Windows.Forms.Panel panelGraphics;
+        private System.Windows.Forms.TextBox txtInput;
     }
 }
 
