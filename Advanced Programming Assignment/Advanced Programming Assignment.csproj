@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Advanced_Programming_Assignment</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>OneDrive.ico</ApplicationIcon>
   </PropertyGroup>
 
 </Project>
