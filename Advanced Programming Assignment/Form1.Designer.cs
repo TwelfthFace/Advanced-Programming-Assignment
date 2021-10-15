@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace Advanced_Programming_Assignment
 {
     partial class Form1
@@ -29,67 +31,70 @@ namespace Advanced_Programming_Assignment
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnRun = new System.Windows.Forms.Button();
-            this.btnCheck = new System.Windows.Forms.Button();
-            this.panelGraphics = new System.Windows.Forms.Panel();
-            this.txtInput = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btnRun
+            // textBox1
             // 
-            this.btnRun.Location = new System.Drawing.Point(12, 409);
-            this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(94, 29);
-            this.btnRun.TabIndex = 1;
-            this.btnRun.Text = "Run";
-            this.btnRun.UseVisualStyleBackColor = true;
+            this.textBox1.Location = new System.Drawing.Point(13, 13);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(447, 673);
+            this.textBox1.TabIndex = 0;
             // 
-            // btnCheck
+            // textBox2
             // 
-            this.btnCheck.Location = new System.Drawing.Point(291, 409);
-            this.btnCheck.Name = "btnCheck";
-            this.btnCheck.Size = new System.Drawing.Size(94, 29);
-            this.btnCheck.TabIndex = 2;
-            this.btnCheck.Text = "Check";
-            this.btnCheck.UseVisualStyleBackColor = true;
+            this.textBox2.Location = new System.Drawing.Point(13, 727);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(392, 27);
+            this.textBox2.TabIndex = 1;
             // 
-            // panelGraphics
+            // button1
             // 
-            this.panelGraphics.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panelGraphics.Location = new System.Drawing.Point(391, 4);
-            this.panelGraphics.Name = "panelGraphics";
-            this.panelGraphics.Size = new System.Drawing.Size(397, 400);
-            this.panelGraphics.TabIndex = 3;
+            this.button1.Location = new System.Drawing.Point(13, 692);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 29);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Run Script";
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // txtInput
+            // button2
             // 
-            this.txtInput.Location = new System.Drawing.Point(13, 4);
-            this.txtInput.Multiline = true;
-            this.txtInput.Name = "txtInput";
-            this.txtInput.Size = new System.Drawing.Size(372, 400);
-            this.txtInput.TabIndex = 4;
+            this.button2.Location = new System.Drawing.Point(411, 726);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(49, 29);
+            this.button2.TabIndex = 3;
+            this.button2.Text = " Go";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.txtInput);
-            this.Controls.Add(this.panelGraphics);
-            this.Controls.Add(this.btnCheck);
-            this.Controls.Add(this.btnRun);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(984, 773);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Advanced Software Assignment";
+            this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button btnRun;
-        private System.Windows.Forms.Button btnCheck;
-        private System.Windows.Forms.Panel panelGraphics;
-        private System.Windows.Forms.TextBox txtInput;
+
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
