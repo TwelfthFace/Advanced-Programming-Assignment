@@ -82,8 +82,8 @@ namespace Advanced_Programming_Assignment
             this.Controls.Add(this.textBox1);
             this.Name = "Form1";
             this.Text = "Advanced Software Assignment";
-            this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 

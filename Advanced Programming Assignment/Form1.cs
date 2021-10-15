@@ -14,7 +14,7 @@ namespace Advanced_Programming_Assignment
         }
 
 
-        //Keep Layout Aligned and Neat on repaint.
+        //keep layout aligned and neat on Repaint
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -23,7 +23,7 @@ namespace Advanced_Programming_Assignment
         }
 
 
-        //sets graphics clipsize.
+        //sets graphics clipsize
         private void SetAndFillClip(PaintEventArgs e)
         {
 
@@ -35,7 +35,8 @@ namespace Advanced_Programming_Assignment
 
         }
 
-        private void Form1_ResizeEnd(object sender, EventArgs e)
+        //force repaint on resize
+        private void Form1_Resize(object sender, EventArgs e)
         {
             this.Invalidate();
         }
