@@ -31,55 +31,67 @@ namespace Advanced_Programming_Assignment
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.txtBoxScript = new System.Windows.Forms.TextBox();
+            this.txtCmdLine = new System.Windows.Forms.TextBox();
+            this.btnRunScript = new System.Windows.Forms.Button();
+            this.btnGo = new System.Windows.Forms.Button();
+            this.lstBoxRanCommands = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtBoxScript
             // 
-            this.textBox1.Location = new System.Drawing.Point(13, 13);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(447, 673);
-            this.textBox1.TabIndex = 0;
+            this.txtBoxScript.Location = new System.Drawing.Point(13, 13);
+            this.txtBoxScript.Multiline = true;
+            this.txtBoxScript.Name = "txtBoxScript";
+            this.txtBoxScript.Size = new System.Drawing.Size(447, 673);
+            this.txtBoxScript.TabIndex = 0;
             // 
-            // textBox2
+            // txtCmdLine
             // 
-            this.textBox2.Location = new System.Drawing.Point(13, 727);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(392, 27);
-            this.textBox2.TabIndex = 1;
+            this.txtCmdLine.Location = new System.Drawing.Point(13, 727);
+            this.txtCmdLine.Name = "txtCmdLine";
+            this.txtCmdLine.Size = new System.Drawing.Size(392, 27);
+            this.txtCmdLine.TabIndex = 1;
             // 
-            // button1
+            // btnRunScript
             // 
-            this.button1.Location = new System.Drawing.Point(13, 692);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 29);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Run Script";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnRunScript.Location = new System.Drawing.Point(13, 692);
+            this.btnRunScript.Name = "btnRunScript";
+            this.btnRunScript.Size = new System.Drawing.Size(94, 29);
+            this.btnRunScript.TabIndex = 2;
+            this.btnRunScript.Text = "Run Script";
+            this.btnRunScript.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnGo
             // 
-            this.button2.Location = new System.Drawing.Point(411, 726);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(49, 29);
-            this.button2.TabIndex = 3;
-            this.button2.Text = " Go";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnGo.Location = new System.Drawing.Point(411, 726);
+            this.btnGo.Name = "btnGo";
+            this.btnGo.Size = new System.Drawing.Size(49, 29);
+            this.btnGo.TabIndex = 3;
+            this.btnGo.Text = " Go";
+            this.btnGo.UseVisualStyleBackColor = true;
+            this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
+            // 
+            // lstBoxRanCommands
+            // 
+            this.lstBoxRanCommands.FormattingEnabled = true;
+            this.lstBoxRanCommands.ItemHeight = 20;
+            this.lstBoxRanCommands.Location = new System.Drawing.Point(13, 761);
+            this.lstBoxRanCommands.Name = "lstBoxRanCommands";
+            this.lstBoxRanCommands.Size = new System.Drawing.Size(447, 104);
+            this.lstBoxRanCommands.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(984, 773);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(1002, 876);
+            this.Controls.Add(this.lstBoxRanCommands);
+            this.Controls.Add(this.btnGo);
+            this.Controls.Add(this.btnRunScript);
+            this.Controls.Add(this.txtCmdLine);
+            this.Controls.Add(this.txtBoxScript);
             this.Name = "Form1";
             this.Text = "Advanced Software Assignment";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
@@ -91,10 +103,11 @@ namespace Advanced_Programming_Assignment
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox txtBoxScript;
+        private System.Windows.Forms.TextBox txtCmdLine;
+        private System.Windows.Forms.Button btnRunScript;
+        private System.Windows.Forms.Button btnGo;
+        private System.Windows.Forms.ListBox lstBoxRanCommands;
     }
 }
 

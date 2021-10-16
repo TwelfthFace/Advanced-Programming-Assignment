@@ -9,8 +9,8 @@ namespace Advanced_Programming_Assignment
         public Form1()
         {
             InitializeComponent();
-            this.Width = 1000;
-            this.Height = 850;
+            //this.Width = 1000;
+            //this.Height = 913;
         }
 
         //keep layout aligned and neat on Repaint
@@ -18,15 +18,9 @@ namespace Advanced_Programming_Assignment
         {
             Graphics g = e.Graphics;
             this.SetAndFillClip(e);
-            this.DrawRectangle(e, 0, 0, 400, 300, Color.Blue);
-        }
 
-        private void DrawRectangle(PaintEventArgs e, int x, int y, int width, int length, Color colour, int penSize = 3)
-        {
-            Pen blackPen = new Pen(colour, penSize);
-            RectangleF clipbound = e.Graphics.ClipBounds;
 
-            e.Graphics.DrawRectangle(blackPen, clipbound.X + penSize-1, y + penSize+12, width, length);
+            //new Command(txtCmdLine).DrawRectangle(e, 0, 0, 400, 300, Color.Blue);
         }
 
         //sets graphics clipsize
@@ -34,7 +28,7 @@ namespace Advanced_Programming_Assignment
         {
 
             // Set the Clip property to a new region.
-            e.Graphics.Clip = new Region(new Rectangle(this.textBox1.Width+50, 13, this.Width-540, this.Height-80));
+            e.Graphics.Clip = new Region(new Rectangle(this.txtBoxScript.Width+50, 13, this.Width-530, this.Height-71));
 
             // Fill the region.
             e.Graphics.FillRegion(Brushes.LightSalmon, e.Graphics.Clip);
@@ -45,6 +39,12 @@ namespace Advanced_Programming_Assignment
         private void Form1_Resize(object sender, EventArgs e)
         {
             this.Invalidate();
+        }
+
+        private void btnGo_Click(object sender, EventArgs e)
+        {
+            Command cmd = new Command(this.txtCmdLine);
+
         }
     }
 }
