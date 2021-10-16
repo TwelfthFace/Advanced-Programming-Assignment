@@ -18,10 +18,17 @@ namespace Advanced_Programming_Assignment
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-
             this.SetAndFillClip(e);
+            this.DrawRectangle(e, 0, 0, 400, 300, Color.Blue);
         }
 
+        private void DrawRectangle(PaintEventArgs e, int x, int y, int width, int length, Color colour, int penSize = 3)
+        {
+            Pen blackPen = new Pen(colour, penSize);
+            RectangleF clipbound = e.Graphics.ClipBounds;
+
+            e.Graphics.DrawRectangle(blackPen, clipbound.X + penSize, y + penSize+12, width, length);
+        }
 
         //sets graphics clipsize
         private void SetAndFillClip(PaintEventArgs e)
