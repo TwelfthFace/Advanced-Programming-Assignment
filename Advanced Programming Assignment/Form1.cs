@@ -6,45 +6,21 @@ namespace Advanced_Programming_Assignment
 {
     public partial class Form1 : Form
     {
+        Graphics g = null;
+
         public Form1()
         {
             InitializeComponent();
-            //this.Width = 1000;
-            //this.Height = 913;
+            g = CreateGraphics();
+            g.Clip = new Region(new Rectangle(txtBoxScript.Width + 50, 13, (Width - 530), Height - 71));
+
         }
 
-        //keep layout aligned and neat on Repaint
-        private void Form1_Paint(object sender, PaintEventArgs e)
+        private void btnGo_MouseClick(object sender, MouseEventArgs e)
         {
-            Graphics g = e.Graphics;
-            this.SetAndFillClip(e);
-
-
-            //new Command(txtCmdLine).DrawRectangle(e, 0, 0, 400, 300, Color.Blue);
+            Command cmd = new Command(txtCmdLine, this.g);
+            cmd.Parser();
         }
 
-        //sets graphics clipsize
-        private void SetAndFillClip(PaintEventArgs e)
-        {
-
-            // Set the Clip property to a new region.
-            e.Graphics.Clip = new Region(new Rectangle(this.txtBoxScript.Width+50, 13, this.Width-530, this.Height-71));
-
-            // Fill the region.
-            e.Graphics.FillRegion(Brushes.LightSalmon, e.Graphics.Clip);
-
-        }
-
-        //force repaint on resize
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            this.Invalidate();
-        }
-
-        private void btnGo_Click(object sender, EventArgs e)
-        {
-            Command cmd = new Command(this.txtCmdLine);
-
-        }
     }
 }

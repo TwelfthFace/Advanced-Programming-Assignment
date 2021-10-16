@@ -9,24 +9,63 @@ namespace Advanced_Programming_Assignment
      //class to define commands and facilitate appropriate feature expansion.
     class Command
     {
-        private System.Windows.Forms.TextBox txtCmdLine;
+        protected Graphics graphicsContext;
+        protected RectangleF clipbound;
+        protected System.Windows.Forms.TextBox txtCmdLine;
+        protected Pen penColor = new Pen(Color.Black, 3);
+        
+        public Command()
+        {
+
+        }
 
         public Command(System.Windows.Forms.TextBox txtCmdLine)
         {
             this.txtCmdLine = txtCmdLine;
         }
 
-        public string txtCmd
+        public Command(System.Windows.Forms.TextBox txtCmdLine, Graphics graphics)
+        {
+            this.txtCmdLine = txtCmdLine;
+            this.graphicsContext = graphics;
+            this.clipbound = graphicsContext.ClipBounds;
+        }
+
+        public string TxtCmd
         {
             get => txtCmdLine.Text;
         }
 
-        private void DrawRectangle(PaintEventArgs e, int x, int y, int width, int length, Color colour, int penSize = 3)
+        public void Parser()
         {
-            Pen blackPen = new Pen(colour, penSize);
-            RectangleF clipbound = e.Graphics.ClipBounds;
+            string command = this.TxtCmd.Trim().ToLower();
+            string[] split = command.Split(" ");
+            int commandParameter = 0;
+            try { 
+            
+                if (split.Length > 2)
+                {
+                    Console.WriteLine("Error!");
+                }
+                if (split.Length == 2)
+                {
+                    commandParameter = Int32.Parse(split[1]);
+                }
 
-            e.Graphics.DrawRectangle(blackPen, clipbound.X + penSize - 1, y + penSize + 12, width, length);
+                switch (split[0])
+                {
+                    case "rectangle":
+                        new Draw(this.graphicsContext).DrawRectangle(0, 0, commandParameter, commandParameter, this.penColor.Color);
+                        break;
+                    case "circle":
+                        new Draw(this.graphicsContext).DrawCircle(commandParameter);
+                        break;
+                }
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
         }
 
     }

@@ -70,7 +70,7 @@ namespace Advanced_Programming_Assignment
             this.btnGo.TabIndex = 3;
             this.btnGo.Text = " Go";
             this.btnGo.UseVisualStyleBackColor = true;
-            this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
+            this.btnGo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnGo_MouseClick);
             // 
             // lstBoxRanCommands
             // 
@@ -86,7 +86,7 @@ namespace Advanced_Programming_Assignment
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1002, 876);
+            this.ClientSize = new System.Drawing.Size(1414, 876);
             this.Controls.Add(this.lstBoxRanCommands);
             this.Controls.Add(this.btnGo);
             this.Controls.Add(this.btnRunScript);
@@ -94,8 +94,6 @@ namespace Advanced_Programming_Assignment
             this.Controls.Add(this.txtBoxScript);
             this.Name = "Form1";
             this.Text = "Advanced Software Assignment";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
-            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 
