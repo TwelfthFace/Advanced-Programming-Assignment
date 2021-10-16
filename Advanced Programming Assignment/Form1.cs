@@ -13,7 +13,6 @@ namespace Advanced_Programming_Assignment
             this.Height = 850;
         }
 
-
         //keep layout aligned and neat on Repaint
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
@@ -27,7 +26,7 @@ namespace Advanced_Programming_Assignment
             Pen blackPen = new Pen(colour, penSize);
             RectangleF clipbound = e.Graphics.ClipBounds;
 
-            e.Graphics.DrawRectangle(blackPen, clipbound.X + penSize, y + penSize+12, width, length);
+            e.Graphics.DrawRectangle(blackPen, clipbound.X + penSize-1, y + penSize+12, width, length);
         }
 
         //sets graphics clipsize
