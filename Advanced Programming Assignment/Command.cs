@@ -13,7 +13,6 @@ namespace Advanced_Programming_Assignment
         protected Graphics graphicsContext;
         protected RectangleF clipbound;
         protected System.Windows.Forms.TextBox txtCmdLine;
-        protected Pen penColor = new Pen(Color.Black, 3);
 
 
         public Command(System.Windows.Forms.TextBox txtCmdLine)
@@ -35,11 +34,11 @@ namespace Advanced_Programming_Assignment
             get => txtCmdLine.Text;
         }
 
-        public Boolean Parser(System.Windows.Forms.ListBox errout)
+        public bool Parser(System.Windows.Forms.ListBox errout)
         {
             string command = this.TxtCmd.Trim().ToLower();
             string[] split = command.Split(" ");
-            string[] commandParameter = {"", ""};
+            string[] commandParameter = {null, null};
             try { 
             
                 if (split.Length > 3)
@@ -65,7 +64,7 @@ namespace Advanced_Programming_Assignment
                             errout.Items.Insert(0, "Missing parameters! [rectangle w h]");
                             return false;
                         }
-                        draw.DrawRectangle(Int32.Parse(commandParameter[0]), Int32.Parse(commandParameter[1]), this.penColor.Color);
+                        draw.DrawRectangle(Int32.Parse(commandParameter[0]), Int32.Parse(commandParameter[1]));
                         break;
                     case "circle":
                         if (split.Length < 2)
@@ -83,13 +82,84 @@ namespace Advanced_Programming_Assignment
                         }
                         draw.moveTo(Int32.Parse(commandParameter[0]), Int32.Parse(commandParameter[1]));
                         break;
+                    case "triangle":
+                        draw.DrawTriangle(Int32.Parse(commandParameter[0]));
+                        break;
+                    case "pen":
+                        if (commandParameter[1] == null)
+                        {
+                            if (split.Length < 2)
+                            {
+                                errout.Items.Insert(0, "Missing parameter! [setcolour colour {pensize}]");
+                                return false;
+                            }
+                            switch (commandParameter[0])
+                            {
+                                case "black":
+                                    draw.setPenColour(Color.Black);
+                                    break;
+                                case "green":
+                                    draw.setPenColour(Color.Green);
+                                    break;
+                                case "blue":
+                                    draw.setPenColour(Color.Blue);
+                                    break;
+                                case "red":
+                                    draw.setPenColour(Color.Red);
+                                    break;
+                                case "yellow":
+                                    draw.setPenColour(Color.Yellow);
+                                    break;
+                                default:
+                                    errout.Items.Insert(0, "Unknown Colour!");
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (commandParameter[0])
+                            {
+                                case "black":
+                                    draw.setPenColour(Color.Black, Int32.Parse(commandParameter[1]));
+                                    break;
+                                case "green":
+                                    draw.setPenColour(Color.Green, Int32.Parse(commandParameter[1]));
+                                    break;
+                                case "blue":
+                                    draw.setPenColour(Color.Blue, Int32.Parse(commandParameter[1]));
+                                    break;
+                                case "red":
+                                    draw.setPenColour(Color.Red, Int32.Parse(commandParameter[1]));
+                                    break;
+                                case "yellow":
+                                    draw.setPenColour(Color.Yellow, Int32.Parse(commandParameter[1]));
+                                    break;
+                                default:
+                                    errout.Items.Insert(0, "Unknown Colour!");
+                                    break;
+                            }
+                        }
+                    break;
+                    case "fill":
+                        if (commandParameter[0].Equals("1") || commandParameter[0].Equals("true"))
+                        {
+                            draw.setFillShapes(true);
+                            break;
+                        }
+                        if (commandParameter[0].Equals("0") || commandParameter[0].Equals("false"))
+                        {
+                            draw.setFillShapes(false);
+                            break;
+                        }
+                        errout.Items.Insert(0, "Unknown Parameter Supplied! Expecting one of '1, true, 0, false'.");
+                        break;
                     default:
                         errout.Items.Insert(0, "Unknown Command!");
                         return false;
                 }
             } catch (Exception e)
             {
-                errout.Items.Insert(0, e.Message);
+                errout.Items.Insert(0, "ERROR: " + e.Message);
             }
             return false;
         }
