@@ -19,10 +19,12 @@ namespace Advanced_Programming_Assignment
         }
 
         private void btnGo_MouseClick(object sender, MouseEventArgs e)
-        { 
-            cmd.Parser(lstBoxRanCommands);
-            txtCmdLine.Text = "";
+        {
+            if (txtCmdLine.Text != string.Empty)
+            {
+                cmd.Parser(lstBoxRanCommands);
+                txtCmdLine.Text = "";
+            }
         }
-
     }
 }
