@@ -11,8 +11,9 @@ namespace Advanced_Programming_Assignment
         protected Turtle turtle;
         protected bool penDown;
         protected bool fillShapes;
-        protected Pen pen = new Pen(Color.Black, 3);
-        protected SolidBrush brush = new SolidBrush(Color.Black);
+        protected Color penColour;
+        protected Pen pen;
+        protected SolidBrush brush;
 
         protected struct Turtle
         {
@@ -27,8 +28,11 @@ namespace Advanced_Programming_Assignment
             this.clipbound = g.ClipBounds;
             this.penDown = false;
             this.fillShapes = false;
+            this.penColour = Color.Black;
+            this.pen = new Pen(penColour, 3);
+            this.brush = new SolidBrush(penColour);
 
-            turtle = new Turtle
+        turtle = new Turtle
             {
                 x = 0,
                 y = 0,
@@ -63,7 +67,9 @@ namespace Advanced_Programming_Assignment
 
         public void setPenColour(Color col, int size = 3)
         {
-            this.pen = new Pen(col, size);
+            this.penColour = col;
+            this.pen = new Pen(penColour, size);
+            this.brush = new SolidBrush(penColour);
         }
 
         public void moveTo(int x, int y)
@@ -72,20 +78,41 @@ namespace Advanced_Programming_Assignment
             turtle.y = y;
         }
 
-        public void DrawRectangle(int width, int length, int penSize = 3)
+        public void reset()
         {
-            graphicsContext.DrawRectangle(pen, ((this.clipbound.X + penSize) - 1) + turtle.x, turtle.y + penSize + 12, width, length);
+            this.moveTo(0, 0);
         }
 
-        public void DrawCircle(int radius)
+        public void drawRectangle(int width, int length, int penSize = 3)
+        {
+            Rectangle rect = new Rectangle((int)(this.clipbound.X + penSize) - 1 + turtle.x, turtle.y + penSize + 12, width, length);
+
+            if (!this.getFillShapes())
+            {
+                graphicsContext.DrawRectangle(pen, rect);
+            }
+            else
+            {
+                graphicsContext.FillRectangle(brush, rect);
+            }
+        }
+
+        public void drawCircle(int radius)
         {
             Rectangle rect = new Rectangle((int)clipbound.X + turtle.x, 20 + turtle.y, radius, radius);
             this.graphicsContext.DrawEllipse(pen, rect);
+            if (!this.getFillShapes())
+            {
+                this.graphicsContext.DrawEllipse(pen, rect);
+            }
+            else
+            {
+                this.graphicsContext.FillEllipse(brush, rect);
+            }
         }
 
-        public void DrawTriangle(int size)
+        public void drawTriangle(int size)
         {
-            SolidBrush brush = new SolidBrush(Color.Blue);
             Point[] points = 
             {
                 //top point
@@ -95,7 +122,14 @@ namespace Advanced_Programming_Assignment
                 //right point
                 new Point(((int)clipbound.X + 100 + size) + turtle.x, 100 + turtle.y)
             };
-            graphicsContext.DrawPolygon(pen, points);
+            if (!this.getFillShapes())
+            {
+                graphicsContext.DrawPolygon(pen, points);
+            }
+            else
+            {
+                graphicsContext.FillPolygon(brush, points);
+            }
         }
     }
 }

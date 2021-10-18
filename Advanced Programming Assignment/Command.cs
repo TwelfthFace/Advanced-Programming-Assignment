@@ -29,14 +29,14 @@ namespace Advanced_Programming_Assignment
             this.draw = new Draw(graphicsContext);
         }
 
-        public string TxtCmd
+        public string txtCmd
         {
             get => txtCmdLine.Text;
         }
 
-        public bool Parser(System.Windows.Forms.ListBox errout)
+        public bool parser(System.Windows.Forms.ListBox errout)
         {
-            string command = this.TxtCmd.Trim().ToLower();
+            string command = this.txtCmd.Trim().ToLower();
             string[] split = command.Split(" ");
             string[] commandParameter = {null, null};
             try { 
@@ -49,7 +49,6 @@ namespace Advanced_Programming_Assignment
                 {
                     commandParameter[0] = split[1];
                 }
-
                 if (split.Length == 3)
                 {
                     commandParameter[0] = split[1];
@@ -64,7 +63,7 @@ namespace Advanced_Programming_Assignment
                             errout.Items.Insert(0, "Missing parameters! [rectangle w h]");
                             return false;
                         }
-                        draw.DrawRectangle(Int32.Parse(commandParameter[0]), Int32.Parse(commandParameter[1]));
+                        draw.drawRectangle(Int32.Parse(commandParameter[0]), Int32.Parse(commandParameter[1]));
                         break;
                     case "circle":
                         if (split.Length < 2)
@@ -72,7 +71,7 @@ namespace Advanced_Programming_Assignment
                             errout.Items.Insert(0, "Missing parameters! [circle c]");
                             return false;
                         }
-                        draw.DrawCircle(Int32.Parse(commandParameter[0]));
+                        draw.drawCircle(Int32.Parse(commandParameter[0]));
                         break;
                     case "moveto":
                         if (split.Length < 3)
@@ -83,7 +82,7 @@ namespace Advanced_Programming_Assignment
                         draw.moveTo(Int32.Parse(commandParameter[0]), Int32.Parse(commandParameter[1]));
                         break;
                     case "triangle":
-                        draw.DrawTriangle(Int32.Parse(commandParameter[0]));
+                        draw.drawTriangle(Int32.Parse(commandParameter[0]));
                         break;
                     case "pen":
                         if (commandParameter[1] == null)
@@ -152,6 +151,9 @@ namespace Advanced_Programming_Assignment
                             break;
                         }
                         errout.Items.Insert(0, "Unknown Parameter Supplied! Expecting one of '1, true, 0, false'.");
+                        break;
+                    case "reset":
+                        draw.reset();
                         break;
                     default:
                         errout.Items.Insert(0, "Unknown Command!");
