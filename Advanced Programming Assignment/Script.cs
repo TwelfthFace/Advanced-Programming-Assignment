@@ -15,16 +15,15 @@ namespace Advanced_Programming_Assignment
         }
 
         public new bool parser(string txtScript, System.Windows.Forms.ListBox errout)
-        { 
-            
+        {
+            errout.Items.Clear();
+
             string command = txtScript.Trim().ToLower();
             string[] lines = command.Split("\r");
             foreach (string line in lines)
             {
                 string formatLine = line.Replace("\n", "");
-
                 base.parser(formatLine, errout);
-               
             }
             
             return true;

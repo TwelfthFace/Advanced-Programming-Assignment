@@ -150,7 +150,7 @@ namespace Advanced_Programming_Assignment
                         draw.reset();
                         break;
                     default:
-                        errout.Items.Insert(0, "Unknown Command!");
+                        errout.Items.Insert(0, "Unknown Command! \"" + split[0] +"\"");
                         return false;
                 }
             } catch (Exception e)
