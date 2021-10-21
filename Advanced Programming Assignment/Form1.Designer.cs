@@ -61,6 +61,7 @@ namespace Advanced_Programming_Assignment
             this.btnRunScript.TabIndex = 2;
             this.btnRunScript.Text = "Run Script";
             this.btnRunScript.UseVisualStyleBackColor = true;
+            this.btnRunScript.Click += new System.EventHandler(this.btnRunScript_Click);
             // 
             // btnGo
             // 

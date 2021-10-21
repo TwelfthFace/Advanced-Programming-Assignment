@@ -10,32 +10,21 @@ namespace Advanced_Programming_Assignment
     class Command
     {
         protected Draw draw;
+        protected Script script;
         protected Graphics graphicsContext;
         protected RectangleF clipbound;
-        protected System.Windows.Forms.TextBox txtCmdLine;
-        protected string txtCmd
-        {
-            get => txtCmdLine.Text;
-        }
-
-
-        public Command(System.Windows.Forms.TextBox txtCmdLine)
-        {
-            this.txtCmdLine = txtCmdLine;
-            this.draw = new Draw(graphicsContext);
-        }
 
         public Command(System.Windows.Forms.TextBox txtCmdLine, Graphics graphics)
         {
-            this.txtCmdLine = txtCmdLine;
             this.graphicsContext = graphics;
             this.clipbound = graphicsContext.ClipBounds;
             this.draw = new Draw(graphicsContext);
+            this.script = new Script(graphicsContext);
         }
 
-        public bool parser(System.Windows.Forms.ListBox errout)
+        public bool parser(string txtCmds, System.Windows.Forms.ListBox errout)
         {
-            string command = this.txtCmd.Trim().ToLower();
+            string command = txtCmds.Trim().ToLower();
             string[] split = command.Split(" ");
             string[] commandParameter = {null, null};
             try { 
@@ -43,6 +32,7 @@ namespace Advanced_Programming_Assignment
                 if (split.Length > 3)
                 {
                     errout.Items.Insert(0, "Too many parameters! Max parameters 2.");
+                    return false;
                 }
                 if (split.Length == 2)
                 {
