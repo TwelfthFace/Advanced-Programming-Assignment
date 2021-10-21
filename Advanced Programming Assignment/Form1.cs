@@ -12,14 +12,13 @@ namespace Advanced_Programming_Assignment
         public Form1()
         {
             InitializeComponent();
-            g = CreateGraphics();
-            g.Clip = new Region(new Rectangle(txtBoxScript.Width + 50, 13, (Width - 530), Height - 71));
+            this.g = CreateGraphics();
+            this.g.Clip = new Region(new Rectangle(txtBoxScript.Width + 50, 13, (this.Width - 530), this.Height - 71));
             this.cmd = new Command(txtCmdLine, this.g);
         }
 
         private void btnGo_MouseClick(object sender, MouseEventArgs e)
         {
-            
                 if (txtCmdLine.Text.Equals("clear"))
                 {
                     this.Invalidate();

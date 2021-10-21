@@ -86,7 +86,7 @@ namespace Advanced_Programming_Assignment
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1414, 876);
+            this.ClientSize = new System.Drawing.Size(1706, 876);
             this.Controls.Add(this.lstBoxRanCommands);
             this.Controls.Add(this.btnGo);
             this.Controls.Add(this.btnRunScript);

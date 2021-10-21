@@ -13,6 +13,10 @@ namespace Advanced_Programming_Assignment
         protected Graphics graphicsContext;
         protected RectangleF clipbound;
         protected System.Windows.Forms.TextBox txtCmdLine;
+        protected string txtCmd
+        {
+            get => txtCmdLine.Text;
+        }
 
 
         public Command(System.Windows.Forms.TextBox txtCmdLine)
@@ -27,11 +31,6 @@ namespace Advanced_Programming_Assignment
             this.graphicsContext = graphics;
             this.clipbound = graphicsContext.ClipBounds;
             this.draw = new Draw(graphicsContext);
-        }
-
-        public string txtCmd
-        {
-            get => txtCmdLine.Text;
         }
 
         public bool parser(System.Windows.Forms.ListBox errout)
@@ -82,6 +81,11 @@ namespace Advanced_Programming_Assignment
                         draw.moveTo(Int32.Parse(commandParameter[0]), Int32.Parse(commandParameter[1]));
                         break;
                     case "triangle":
+                        if (split.Length < 2)
+                        {
+                            errout.Items.Insert(0, "Missing parameters! [triangle s]");
+                            return false;
+                        }
                         draw.drawTriangle(Int32.Parse(commandParameter[0]));
                         break;
                     case "pen":
@@ -111,7 +115,7 @@ namespace Advanced_Programming_Assignment
                                     break;
                                 default:
                                     errout.Items.Insert(0, "Unknown Colour!");
-                                    break;
+                                    return false;
                             }
                         }
                         else
@@ -135,7 +139,7 @@ namespace Advanced_Programming_Assignment
                                     break;
                                 default:
                                     errout.Items.Insert(0, "Unknown Colour!");
-                                    break;
+                                    return false;
                             }
                         }
                     break;
@@ -162,8 +166,9 @@ namespace Advanced_Programming_Assignment
             } catch (Exception e)
             {
                 errout.Items.Insert(0, "ERROR: " + e.Message);
+                return false;
             }
-            return false;
+            return true;
         }
 
         public Command() { }

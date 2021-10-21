@@ -74,8 +74,8 @@ namespace Advanced_Programming_Assignment
 
         public void moveTo(int x, int y)
         {
-            turtle.x = x;
-            turtle.y = y;
+            this.turtle.x = x;
+            this.turtle.y = y;
         }
 
         public void reset()
@@ -85,7 +85,7 @@ namespace Advanced_Programming_Assignment
 
         public void drawRectangle(int width, int length, int penSize = 3)
         {
-            Rectangle rect = new Rectangle((int)(this.clipbound.X + penSize) - 1 + turtle.x, turtle.y + penSize + 12, width, length);
+            Rectangle rect = new Rectangle((int)(this.clipbound.X + this.pen.Width) - 1 + this.turtle.x, this.turtle.y + (int)this.pen.Width + 12, width, length);
 
             if (!this.getFillShapes())
             {
@@ -99,7 +99,7 @@ namespace Advanced_Programming_Assignment
 
         public void drawCircle(int radius)
         {
-            Rectangle rect = new Rectangle((int)clipbound.X + turtle.x, 20 + turtle.y, radius, radius);
+            Rectangle rect = new Rectangle((int)this.clipbound.X + this.turtle.x, 20 + this.turtle.y, radius, radius);
             this.graphicsContext.DrawEllipse(pen, rect);
             if (!this.getFillShapes())
             {
@@ -116,11 +116,11 @@ namespace Advanced_Programming_Assignment
             Point[] points = 
             {
                 //top point
-                new Point(((int)clipbound.X + 55) + turtle.x, (20 - size) + turtle.y),
+                new Point(((int)clipbound.X + 55) + this.turtle.x, (20 - size) + this.turtle.y),
                 //left point
-                new Point(((int)clipbound.X + 10 - size) + turtle.x, (100) + turtle.y),
+                new Point(((int)clipbound.X + 10 - size) + this.turtle.x, (100) + this.turtle.y),
                 //right point
-                new Point(((int)clipbound.X + 100 + size) + turtle.x, 100 + turtle.y)
+                new Point(((int)clipbound.X + 100 + size) + this.turtle.x, 100 + this.turtle.y)
             };
             if (!this.getFillShapes())
             {
