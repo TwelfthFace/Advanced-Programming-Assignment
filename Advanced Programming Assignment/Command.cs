@@ -26,12 +26,12 @@ namespace Advanced_Programming_Assignment
         {
             string command = txtCmds.Trim().ToLower();
             string[] split = command.Split(" ");
-            string[] commandParameter = {null, null};
+            string[] commandParameter = {null, null, null};
             try { 
             
-                if (split.Length > 3)
+                if (split.Length > 4)
                 {
-                    errout.Items.Insert(0, "Too many parameters! Max parameters 2.");
+                    errout.Items.Insert(0, "Too many parameters! Max parameters 3.");
                     return false;
                 }
                 if (split.Length == 2)
@@ -42,6 +42,12 @@ namespace Advanced_Programming_Assignment
                 {
                     commandParameter[0] = split[1];
                     commandParameter[1] = split[2];
+                }
+                if (split.Length == 4)
+                {
+                    commandParameter[0] = split[1];
+                    commandParameter[1] = split[2];
+                    commandParameter[2] = split[3];
                 }
 
                 switch (split[0])
@@ -71,12 +77,24 @@ namespace Advanced_Programming_Assignment
                         draw.moveTo(Int32.Parse(commandParameter[0]), Int32.Parse(commandParameter[1]));
                         break;
                     case "triangle":
-                        if (split.Length < 2)
+                        if (commandParameter[2] == null)
                         {
-                            errout.Items.Insert(0, "Missing parameters! [triangle s]");
-                            return false;
+                            if (split.Length < 2)
+                            {
+                                errout.Items.Insert(0, "Missing parameters! [triangle s]");
+                                return false;
+                            }
+                            draw.drawTriangle(Int32.Parse(commandParameter[0]));
                         }
-                        draw.drawTriangle(Int32.Parse(commandParameter[0]));
+                        else
+                        {
+                            if (split.Length < 3)
+                            {
+                                errout.Items.Insert(0, "Missing parameters! [triangle a,b,c]");
+                                return false;
+                            }
+                            draw.drawTriangle(Int32.Parse(commandParameter[0]), Int32.Parse(commandParameter[1]), Int32.Parse(commandParameter[2]));
+                        }
                         break;
                     case "pen":
                         if (commandParameter[1] == null)

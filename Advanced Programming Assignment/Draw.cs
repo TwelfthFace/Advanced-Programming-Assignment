@@ -99,7 +99,7 @@ namespace Advanced_Programming_Assignment
 
         public void drawCircle(int radius)
         {
-            Rectangle rect = new Rectangle((int)this.clipbound.X + this.turtle.x, 20 + this.turtle.y, radius, radius);
+            Rectangle rect = new Rectangle((int)this.clipbound.X + this.turtle.x + 3, 20 + this.turtle.y - 5, radius, radius);
             this.graphicsContext.DrawEllipse(pen, rect);
             if (!this.getFillShapes())
             {
@@ -121,6 +121,27 @@ namespace Advanced_Programming_Assignment
                 new Point(((int)clipbound.X + 10 - size) + this.turtle.x, (100) + this.turtle.y),
                 //right point
                 new Point(((int)clipbound.X + 100 + size) + this.turtle.x, 100 + this.turtle.y)
+            };
+            if (!this.getFillShapes())
+            {
+                graphicsContext.DrawPolygon(pen, points);
+            }
+            else
+            {
+                graphicsContext.FillPolygon(brush, points);
+            }
+        }
+
+        public void drawTriangle(int a, int b, int c)
+        {
+            Point[] points =
+            {
+                //top point
+                new Point(((int)clipbound.X + 55) + this.turtle.x, (20 - a) + this.turtle.y),
+                //left point
+                new Point(((int)clipbound.X + 10 - b) + this.turtle.x, (100) + this.turtle.y),
+                //right point
+                new Point(((int)clipbound.X + 100 + c) + this.turtle.x, 100 + this.turtle.y)
             };
             if (!this.getFillShapes())
             {
