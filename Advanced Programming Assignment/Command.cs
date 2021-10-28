@@ -66,7 +66,7 @@ namespace Advanced_Programming_Assignment
                             errout.Items.Insert(0, "Missing parameters! [circle c]");
                             return false;
                         }
-                        draw.drawCircle(Int32.Parse(commandParameter[0]));
+                        //draw.drawCircle(Int32.Parse(commandParameter[0]));
                         break;
                     case "moveto":
                         if (split.Length < 3)

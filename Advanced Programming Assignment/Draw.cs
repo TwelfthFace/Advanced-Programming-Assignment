@@ -81,35 +81,38 @@ namespace Advanced_Programming_Assignment
         public void reset()
         {
             this.moveTo(0, 0);
+            this.fillShapes = false;
         }
 
         public void drawRectangle(int width, int length, int penSize = 3)
         {
-            Rectangle rect = new Rectangle((int)(this.clipbound.X + this.pen.Width) - 1 + this.turtle.x, this.turtle.y + (int)this.pen.Width + 12, width, length);
-
             if (!this.getFillShapes())
             {
-                graphicsContext.DrawRectangle(pen, rect);
+                Rectangle rec = (Rectangle)new ShapeFactory(penColour, (int)(this.clipbound.X + this.pen.Width) - 1 + this.turtle.x, this.turtle.y + (int)this.pen.Width + 12, width, length).getShape("rectangle");
+                rec.draw(graphicsContext);
+
             }
             else
             {
-                graphicsContext.FillRectangle(brush, rect);
+                Rectangle rec = (Rectangle)new ShapeFactory(penColour, (int)(this.clipbound.X + this.pen.Width) - 1 + this.turtle.x, this.turtle.y + (int)this.pen.Width + 12, width, length).getShape("rectangle");
+                rec.isFilled(true);
+                rec.draw(graphicsContext);
             }
         }
 
-        public void drawCircle(int radius)
-        {
-            Rectangle rect = new Rectangle((int)this.clipbound.X + this.turtle.x + 3, 20 + this.turtle.y - 5, radius, radius);
-            this.graphicsContext.DrawEllipse(pen, rect);
-            if (!this.getFillShapes())
-            {
-                this.graphicsContext.DrawEllipse(pen, rect);
-            }
-            else
-            {
-                this.graphicsContext.FillEllipse(brush, rect);
-            }
-        }
+        //public void drawCircle(int radius)
+        //{
+        //    Rectangle rect = new Rectangle((int)this.clipbound.X + this.turtle.x + 3, 20 + this.turtle.y - 5, radius, radius);
+        //    this.graphicsContext.DrawEllipse(pen, rect);
+        //    if (!this.getFillShapes())
+        //    {
+        //        this.graphicsContext.DrawEllipse(pen, rect);
+        //    }
+        //    else
+        //    {
+        //        this.graphicsContext.FillEllipse(brush, rect);
+        //    }
+        //}
 
         public void drawTriangle(int size)
         {

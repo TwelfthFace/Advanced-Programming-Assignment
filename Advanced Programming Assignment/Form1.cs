@@ -14,7 +14,7 @@ namespace Advanced_Programming_Assignment
         {
             InitializeComponent();
             this.g = CreateGraphics();
-            this.g.Clip = new Region(new Rectangle(txtBoxScript.Width + 50, 13, (this.Width - 530), this.Height - 71));
+            this.g.Clip = new Region(new System.Drawing.Rectangle(txtBoxScript.Width + 50, 13, (this.Width - 530), this.Height - 71));
             this.cmd = new Command(txtCmdLine, this.g);
             this.script = new Script(this.g);
         }
