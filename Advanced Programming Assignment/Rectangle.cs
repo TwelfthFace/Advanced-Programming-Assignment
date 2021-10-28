@@ -9,10 +9,9 @@ namespace Advanced_Programming_Assignment
     {
         int width, height;
 
-        public Rectangle(Color colour, int x, int y, int width, int height) : base(colour, x, y)
+        public Rectangle(Color colour, int x, int y) : base(colour, x, y)
         {
-            this.width = width;
-            this.height = height;
+
         }
 
         public override void draw(Graphics graphicsContext)
@@ -26,6 +25,13 @@ namespace Advanced_Programming_Assignment
             {
                 graphicsContext.FillRectangle(brush, new System.Drawing.Rectangle(x, y, width, height));
             }
+        }
+
+        public override void set(Color colour, int x, int y, params int[] list)
+        {
+            base.set(colour, x, y);
+            this.width = list[0];
+            this.height = list[1];
         }
         public Rectangle()
         {

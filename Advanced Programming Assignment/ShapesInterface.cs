@@ -7,6 +7,7 @@ namespace Advanced_Programming_Assignment
 {
     interface ShapesInterface
     {
+        void set(Color colour, int x, int y, params int[] list);
 
         void draw(Graphics graphicsContext);
 

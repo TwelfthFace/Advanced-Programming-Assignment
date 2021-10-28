@@ -171,7 +171,8 @@ namespace Advanced_Programming_Assignment
                         errout.Items.Insert(0, "Unknown Command! \"" + split[0] +"\"");
                         return false;
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 errout.Items.Insert(0, "ERROR: " + e.Message);
                 return false;

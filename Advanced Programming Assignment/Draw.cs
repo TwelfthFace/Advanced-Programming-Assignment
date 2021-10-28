@@ -88,15 +88,16 @@ namespace Advanced_Programming_Assignment
         {
             if (!this.getFillShapes())
             {
-                Rectangle rec = (Rectangle)new ShapeFactory(penColour, (int)(this.clipbound.X + this.pen.Width) - 1 + this.turtle.x, this.turtle.y + (int)this.pen.Width + 12, width, length).getShape("rectangle");
+                Rectangle rec = (Rectangle)new ShapeFactory().getShape("rectangle");
+                rec.set(penColour, (int)(this.clipbound.X + this.pen.Width) - 1 + this.turtle.x, this.turtle.y + (int)this.pen.Width + 12, width, length);
                 rec.draw(graphicsContext);
 
             }
             else
             {
-                Rectangle rec = (Rectangle)new ShapeFactory(penColour, (int)(this.clipbound.X + this.pen.Width) - 1 + this.turtle.x, this.turtle.y + (int)this.pen.Width + 12, width, length).getShape("rectangle");
-                rec.isFilled(true);
-                rec.draw(graphicsContext);
+                //Rectangle rec = (Rectangle)new ShapeFactory(penColour, (int)(this.clipbound.X + this.pen.Width) - 1 + this.turtle.x, this.turtle.y + (int)this.pen.Width + 12, width, length).getShape("rectangle");
+                //rec.isFilled(true);
+                //rec.draw(graphicsContext);
             }
         }
 

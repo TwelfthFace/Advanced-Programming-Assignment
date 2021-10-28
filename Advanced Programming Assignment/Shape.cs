@@ -15,8 +15,11 @@ namespace Advanced_Programming_Assignment
 
         public Shape()
         {
-            penColour = Color.Red;
-            x = y - 100;
+            this.penColour = Color.Red;
+            this.pen = new Pen(penColour, 3);
+            this.brush = new SolidBrush(penColour);
+            x = 0;
+            y = 0;
         }
 
         public Shape(Color colour, int x, int y)
@@ -35,5 +38,13 @@ namespace Advanced_Programming_Assignment
             this.fill = fill;
         }
 
+        public virtual void set(Color colour, int x, int y, params int[] list)
+        {
+            this.penColour = colour;
+            this.pen = new Pen(colour, 3);
+            this.brush = new SolidBrush(colour);
+            this.x = x;
+            this.y = y;
+        }
     }
 }
