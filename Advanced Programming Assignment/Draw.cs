@@ -86,34 +86,33 @@ namespace Advanced_Programming_Assignment
 
         public void drawRectangle(int width, int length, int penSize = 3)
         {
+            Rectangle rec = (Rectangle)new ShapeFactory().getShape("rectangle");
+            rec.set(penColour, (int)(this.clipbound.X + this.pen.Width) - 1 + this.turtle.x, this.turtle.y + (int)this.pen.Width + 12, width, length);
             if (!this.getFillShapes())
-            {
-                Rectangle rec = (Rectangle)new ShapeFactory().getShape("rectangle");
-                rec.set(penColour, (int)(this.clipbound.X + this.pen.Width) - 1 + this.turtle.x, this.turtle.y + (int)this.pen.Width + 12, width, length);
+            { 
                 rec.draw(graphicsContext);
-
             }
             else
             {
-                //Rectangle rec = (Rectangle)new ShapeFactory(penColour, (int)(this.clipbound.X + this.pen.Width) - 1 + this.turtle.x, this.turtle.y + (int)this.pen.Width + 12, width, length).getShape("rectangle");
-                //rec.isFilled(true);
-                //rec.draw(graphicsContext);
+                rec.isFilled(true);
+                rec.draw(graphicsContext);
             }
         }
 
-        //public void drawCircle(int radius)
-        //{
-        //    Rectangle rect = new Rectangle((int)this.clipbound.X + this.turtle.x + 3, 20 + this.turtle.y - 5, radius, radius);
-        //    this.graphicsContext.DrawEllipse(pen, rect);
-        //    if (!this.getFillShapes())
-        //    {
-        //        this.graphicsContext.DrawEllipse(pen, rect);
-        //    }
-        //    else
-        //    {
-        //        this.graphicsContext.FillEllipse(brush, rect);
-        //    }
-        //}
+        public void drawCircle(int radius)
+        {
+            Circle circ = (Circle)new ShapeFactory().getShape("circle");
+            circ.set(penColour, (int)this.clipbound.X + this.turtle.x + 3, 20 + this.turtle.y - 5, radius);
+            if (!this.getFillShapes())
+            {
+                circ.draw(graphicsContext);
+            }
+            else
+            {
+                circ.isFilled(true);
+                circ.draw(graphicsContext);
+            }
+        }
 
         public void drawTriangle(int size)
         {

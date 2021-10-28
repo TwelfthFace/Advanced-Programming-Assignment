@@ -12,6 +12,5 @@ namespace Advanced_Programming_Assignment
         void draw(Graphics graphicsContext);
 
         void isFilled(bool fill);
-
     }
 }

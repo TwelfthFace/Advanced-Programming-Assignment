@@ -15,6 +15,8 @@ namespace Advanced_Programming_Assignment
             {
                 case "rectangle":
                     return new Rectangle();
+                case "circle":
+                    return new Circle();
                 default:
                     return null;
             }
