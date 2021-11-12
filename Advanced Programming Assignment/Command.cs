@@ -103,7 +103,7 @@ namespace Advanced_Programming_Assignment
                             return false;
                         }
 
-                        if (paramsSplit.Length != 2 && paramsSplit.Length != 3)
+                        if (paramsSplit.Length != 1 && paramsSplit.Length != 2)
                         {
                             errBox.Items.Insert(0, "Missing parameters! [moveto x,y] or [moveto x]");
                             return false;
