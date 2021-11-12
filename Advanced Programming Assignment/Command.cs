@@ -9,7 +9,7 @@ namespace Advanced_Programming_Assignment
     //class to define commands and facilitate appropriate feature expansion.
     public class Command
     {
-        protected Draw draw;
+        public Draw draw;
         protected Script script;
         protected Graphics graphicsContext;
         protected RectangleF clipbound;
@@ -29,11 +29,6 @@ namespace Advanced_Programming_Assignment
             this.draw = new Draw(graphicsContext);
             this.script = new Script(errBox, graphicsContext);
             this.errBox = errBox;
-        }
-
-        public Pen TESTgetPen()
-        {
-            return this.draw.getPen();
         }
 
         public bool parser(string txtCmds)
@@ -212,13 +207,13 @@ namespace Advanced_Programming_Assignment
                         if (paramsSplit[0].Equals("1") || paramsSplit[0].Equals("true"))
                         {
                             draw.setFillShapes(true);
-                            return false;
+                            return true;
                         }
 
                         if (paramsSplit[0].Equals("0") || paramsSplit[0].Equals("false"))
                         {
                             draw.setFillShapes(false);
-                            return false;
+                            return true;
                         }
 
                         errBox.Items.Insert(0, "Unknown Parameter Supplied! Expecting one of '1, true, 0, false'.");

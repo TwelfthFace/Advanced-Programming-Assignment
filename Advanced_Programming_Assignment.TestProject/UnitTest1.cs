@@ -111,51 +111,51 @@ namespace Advanced_Programming_Assignment.TestProject
         public void TestPenDefaultSettingMethod()
         {
             Advanced_Programming_Assignment.Form1 form1 = new Form1();
-            Assert.AreEqual(form1.cmd.TESTgetPen().Color, Color.Black);
-            Assert.AreEqual(form1.cmd.TESTgetPen().Width, 3);
+            Assert.AreEqual(form1.cmd.draw.getPen().Color, Color.Black);
+            Assert.AreEqual(form1.cmd.draw.getPen().Width, 3);
         }
         [TestMethod]
         public void TestPenColorBlackMethod()
         {
             Advanced_Programming_Assignment.Form1 form1 = new Form1();
             Assert.IsTrue(form1.cmd.parser("pen black"));
-            Assert.AreEqual(form1.cmd.TESTgetPen().Color, Color.Black);
+            Assert.AreEqual(form1.cmd.draw.getPen().Color, Color.Black);
         }
         [TestMethod]
         public void TestPenColorGreenMethod()
         {
             Advanced_Programming_Assignment.Form1 form1 = new Form1();
             Assert.IsTrue(form1.cmd.parser("pen green"));
-            Assert.AreEqual(form1.cmd.TESTgetPen().Color, Color.Green);
+            Assert.AreEqual(form1.cmd.draw.getPen().Color, Color.Green);
         }
         [TestMethod]
         public void TestPenColorBlueMethod()
         {
             Advanced_Programming_Assignment.Form1 form1 = new Form1();
             Assert.IsTrue(form1.cmd.parser("pen blue"));
-            Assert.AreEqual(form1.cmd.TESTgetPen().Color, Color.Blue);
+            Assert.AreEqual(form1.cmd.draw.getPen().Color, Color.Blue);
         }
         [TestMethod]
         public void TestPenColorRedMethod()
         {
             Advanced_Programming_Assignment.Form1 form1 = new Form1();
             Assert.IsTrue(form1.cmd.parser("pen red"));
-            Assert.AreEqual(form1.cmd.TESTgetPen().Color, Color.Red);
+            Assert.AreEqual(form1.cmd.draw.getPen().Color, Color.Red);
         }
         [TestMethod]
         public void TestPenColorYellowMethod()
         {
             Advanced_Programming_Assignment.Form1 form1 = new Form1();
             Assert.IsTrue(form1.cmd.parser("pen yellow"));
-            Assert.AreEqual(form1.cmd.TESTgetPen().Color, Color.Yellow);
+            Assert.AreEqual(form1.cmd.draw.getPen().Color, Color.Yellow);
         }
         [TestMethod]
         public void TestPenColorOptionalParameterMethod()
         {
             Advanced_Programming_Assignment.Form1 form1 = new Form1();
             Assert.IsTrue(form1.cmd.parser("pen green,10"));
-            Assert.AreEqual(form1.cmd.TESTgetPen().Color, Color.Green);
-            Assert.AreEqual(form1.cmd.TESTgetPen().Width, 10);
+            Assert.AreEqual(form1.cmd.draw.getPen().Color, Color.Green);
+            Assert.AreEqual(form1.cmd.draw.getPen().Width, 10);
         }
         [TestMethod]
         public void TestPenColorInvalidColourMethod()
@@ -168,6 +168,77 @@ namespace Advanced_Programming_Assignment.TestProject
         {
             Advanced_Programming_Assignment.Form1 form1 = new Form1();
             Assert.IsFalse(form1.cmd.parser("pen green,x"));
+        }
+
+        //moveto testing functions
+        [TestMethod]
+        public void TestMoveToMethod()
+        {
+            Advanced_Programming_Assignment.Form1 form1 = new Form1();
+            Assert.IsTrue(form1.cmd.parser("moveto 500,400"));
+            Assert.AreEqual(form1.cmd.draw.getTurtleX(), 500);
+            Assert.AreEqual(form1.cmd.draw.getTurtleY(), 400);
+        }
+        [TestMethod]
+        public void TestMoveToDefaultSettingMethod()
+        {
+            Advanced_Programming_Assignment.Form1 form1 = new Form1();
+            Assert.AreEqual(form1.cmd.draw.getTurtleX(), 0);
+            Assert.AreEqual(form1.cmd.draw.getTurtleY(), 0);
+        }
+        [TestMethod]
+        public void TestMoveToIncorrectParameterMethod()
+        {
+            Advanced_Programming_Assignment.Form1 form1 = new Form1();
+            Assert.IsFalse(form1.cmd.parser("moveto 500,x"));
+        }
+
+        //fill testing functions
+        [TestMethod]
+        public void TestFillDefaultSettingMethod()
+        {
+            Advanced_Programming_Assignment.Form1 form1 = new Form1();
+            Assert.IsFalse(form1.cmd.draw.getFillShapes());
+        }
+        [TestMethod]
+        public void TestFill1ParameterMethod()
+        {
+            Advanced_Programming_Assignment.Form1 form1 = new Form1();
+            Assert.IsTrue(form1.cmd.parser("fill 1"));
+            Assert.IsTrue(form1.cmd.draw.getFillShapes());
+        }
+        [TestMethod]
+        public void TestFillTrueParameterMethod()
+        {
+            Advanced_Programming_Assignment.Form1 form1 = new Form1();
+            Assert.IsTrue(form1.cmd.parser("fill true"));
+            Assert.IsTrue(form1.cmd.draw.getFillShapes());
+        }
+        [TestMethod]
+        public void TestFillTFalseParameterMethod()
+        {
+            Advanced_Programming_Assignment.Form1 form1 = new Form1();
+            Assert.IsTrue(form1.cmd.parser("fill false"));
+            Assert.IsFalse(form1.cmd.draw.getFillShapes());
+        }
+        [TestMethod]
+        public void TestFill0ParameterMethod()
+        {
+            Advanced_Programming_Assignment.Form1 form1 = new Form1();
+            Assert.IsTrue(form1.cmd.parser("fill 0"));
+            Assert.IsFalse(form1.cmd.draw.getFillShapes());
+        }
+        [TestMethod]
+        public void TestFillInvalidParameterMethod()
+        {
+            Advanced_Programming_Assignment.Form1 form1 = new Form1();
+            Assert.IsFalse(form1.cmd.parser("fill x"));
+        }
+        [TestMethod]
+        public void TestFillMissingParameterMethod()
+        {
+            Advanced_Programming_Assignment.Form1 form1 = new Form1();
+            Assert.IsFalse(form1.cmd.parser("fill"));
         }
     }
 }

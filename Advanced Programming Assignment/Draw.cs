@@ -28,7 +28,6 @@ namespace Advanced_Programming_Assignment
         {
             this.graphicsContext = g;
             this.clipbound = g.ClipBounds;
-            this.penDown = false;
             this.fillShapes = false;
             this.penColour = Color.Black;
             this.pen = new Pen(penColour, 3);
@@ -42,14 +41,14 @@ namespace Advanced_Programming_Assignment
             };
         }
 
-        public bool getPendown()
+        public int getTurtleX()
         {
-            return this.penDown;
+            return turtle.x;
         }
 
-        public void setPendown(bool value)
+        public int getTurtleY()
         {
-            this.penDown = value;
+            return turtle.y;
         }
 
         public Pen getPen()
