@@ -145,5 +145,10 @@ namespace Advanced_Programming_Assignment
                 tri.draw(graphicsContext);
             }
         }
+
+        public void drawLine(int x, int y)
+        {
+            graphicsContext.DrawLine(pen, (int)(this.clipbound.X + this.turtle.x), (int)(this.clipbound.Y + this.turtle.y), (int)(this.clipbound.X + this.turtle.x) + x, (int)(this.clipbound.Y + this.turtle.y) + y);
+        }
     }
 }

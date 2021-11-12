@@ -7,11 +7,6 @@ namespace Advanced_Programming_Assignment
 {
     public class ForFunction : Function
     {
-        public ForFunction(System.Windows.Forms.ListBox errBox, Graphics g): base(errBox, g)
-        {
-
-        }
-
         public override bool run(string[] parameters)
         {
             switch (parameters[2])
@@ -43,5 +38,6 @@ namespace Advanced_Programming_Assignment
             }   
             return false;
         }
+        public ForFunction(System.Windows.Forms.ListBox errBox, Graphics g) : base(errBox, g) { }
     }
 }

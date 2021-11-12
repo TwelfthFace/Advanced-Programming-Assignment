@@ -8,7 +8,7 @@ namespace Advanced_Programming_Assignment
     public abstract class Function : FunctionInterface
     {
         protected Graphics graphicsContext;
-        public List<String> commands = new List<string>();
+        public List<string> commands = new List<string>();
         protected System.Windows.Forms.ListBox errBox;
         protected Command cmd;
 

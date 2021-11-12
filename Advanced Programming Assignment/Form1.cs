@@ -28,14 +28,14 @@ namespace Advanced_Programming_Assignment
                 } else {
                     if (txtCmdLine.Text.Equals("reset"))
                     {
-                        //this.Invalidate();
+                        this.Invalidate();
                         cmd.parser(txtCmdLine.Text);
                         txtCmdLine.Text = "";
                     } else {
                         if (txtCmdLine.Text != string.Empty)
                         {
                             cmd.parser(txtCmdLine.Text);
-                            //txtCmdLine.Text = "";
+                            txtCmdLine.Text = "";
                         }
                     }
                 }
