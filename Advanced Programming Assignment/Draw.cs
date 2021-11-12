@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Advanced_Programming_Assignment
 {
-    class Draw : Command
+    public class Draw : Command
     {
 
         protected Turtle turtle;
@@ -21,6 +21,8 @@ namespace Advanced_Programming_Assignment
             public int y;
             public Pen turtleColour;
         }
+
+        public Draw() { }
 
         public Draw(Graphics g)
         {
@@ -78,16 +80,16 @@ namespace Advanced_Programming_Assignment
             this.turtle.y = y;
         }
 
-        public void reset()
+        public void moveTo(int z)
         {
-            this.moveTo(0, 0);
-            this.fillShapes = false;
+            this.turtle.x += z;
+            this.turtle.y += z;
         }
 
-        public void drawRectangle(int width, int length, int penSize = 3)
+        public void drawRectangle(int width, int length)
         {
-            Rectangle rec = (Rectangle)new ShapeFactory().getShape("rectangle");
-            rec.set(penColour, (int)(this.clipbound.X + this.pen.Width) - 1 + this.turtle.x, this.turtle.y + (int)this.pen.Width + 12, width, length);
+            Shape rec = new ShapeFactory().getShape("rectangle");
+            rec.set(penColour, (int)(this.clipbound.X + this.pen.Width) - 1 + this.turtle.x, this.turtle.y + (int)this.pen.Width + 12, pen.Width, width, length);
             if (!this.getFillShapes())
             { 
                 rec.draw(graphicsContext);
@@ -101,8 +103,8 @@ namespace Advanced_Programming_Assignment
 
         public void drawCircle(int radius)
         {
-            Circle circ = (Circle)new ShapeFactory().getShape("circle");
-            circ.set(penColour, (int)this.clipbound.X + this.turtle.x + 3, 20 + this.turtle.y - 5, radius);
+            Shape circ = new ShapeFactory().getShape("circle");
+            circ.set(penColour, (int)this.clipbound.X + this.turtle.x + 3, 20 + this.turtle.y - 5, pen.Width, radius);
             if (!this.getFillShapes())
             {
                 circ.draw(graphicsContext);
@@ -116,43 +118,31 @@ namespace Advanced_Programming_Assignment
 
         public void drawTriangle(int size)
         {
-            Point[] points = 
-            {
-                //top point
-                new Point(((int)clipbound.X + 55) + this.turtle.x, (20 - size) + this.turtle.y),
-                //left point
-                new Point(((int)clipbound.X + 10 - size) + this.turtle.x, (100) + this.turtle.y),
-                //right point
-                new Point(((int)clipbound.X + 100 + size) + this.turtle.x, 100 + this.turtle.y)
-            };
+            Shape tri = new ShapeFactory().getShape("triangle");
+            tri.set(penColour, (int)this.clipbound.X + this.turtle.x + 3, (int)this.clipbound.Y + 20 +  this.turtle.y - 5, pen.Width, size);
             if (!this.getFillShapes())
             {
-                graphicsContext.DrawPolygon(pen, points);
+                tri.draw(graphicsContext);
             }
             else
             {
-                graphicsContext.FillPolygon(brush, points);
+                tri.isFilled(true);
+                tri.draw(graphicsContext);
             }
         }
 
         public void drawTriangle(int a, int b, int c)
         {
-            Point[] points =
-            {
-                //top point
-                new Point(((int)clipbound.X + 55) + this.turtle.x, (20 - a) + this.turtle.y),
-                //left point
-                new Point(((int)clipbound.X + 10 - b) + this.turtle.x, (100) + this.turtle.y),
-                //right point
-                new Point(((int)clipbound.X + 100 + c) + this.turtle.x, 100 + this.turtle.y)
-            };
+            Shape tri = new ShapeFactory().getShape("triangle");
+            tri.set(penColour, (int)(this.clipbound.X + this.turtle.x) + 3, 20 + ((int)this.clipbound.Y + 20 + this.turtle.y) - 5, pen.Width, a, b, c);
             if (!this.getFillShapes())
             {
-                graphicsContext.DrawPolygon(pen, points);
+                tri.draw(graphicsContext);
             }
             else
             {
-                graphicsContext.FillPolygon(brush, points);
+                tri.isFilled(true);
+                tri.draw(graphicsContext);
             }
         }
     }

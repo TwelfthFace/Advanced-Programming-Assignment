@@ -33,15 +33,22 @@ namespace Advanced_Programming_Assignment
 
         public virtual void draw(Graphics graphicsContext){}
 
-        public virtual void isFilled(bool fill) 
+        public void isFilled(bool fill) 
         {
             this.fill = fill;
         }
 
-        public virtual void set(Color colour, int x, int y, params int[] list)
+        public virtual void set(Color colour, int x, int y, float penWidth = 3.0f, params int[] list)
         {
             this.penColour = colour;
-            this.pen = new Pen(colour, 3);
+            if (penWidth != 0)
+            {
+                this.pen = new Pen(colour, penWidth);
+            }
+            else
+            {
+                this.pen = new Pen(colour, 3);
+            }
             this.brush = new SolidBrush(colour);
             this.x = x;
             this.y = y;

@@ -10,15 +10,16 @@ namespace Advanced_Programming_Assignment
         public Shape getShape(String shape)
         {
             shape = shape.ToLower().Trim();
-
             switch (shape)
             {
                 case "rectangle":
                     return new Rectangle();
                 case "circle":
                     return new Circle();
+                case "triangle":
+                    return new Triangle();
                 default:
-                    return null;
+                    throw new NotImplementedException();
             }
         }
     }

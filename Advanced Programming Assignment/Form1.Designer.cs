@@ -95,6 +95,7 @@ namespace Advanced_Programming_Assignment
             this.Controls.Add(this.txtBoxScript);
             this.Name = "Form1";
             this.Text = "Advanced Software Assignment";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

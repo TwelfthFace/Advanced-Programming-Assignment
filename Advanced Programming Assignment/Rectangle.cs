@@ -21,14 +21,13 @@ namespace Advanced_Programming_Assignment
             }
         }
 
-        public override void set(Color colour, int x, int y, params int[] list)
+        public override void set(Color colour, int x, int y, float penWidth = 3.0f, params int[] list)
         {
-            base.set(colour, x, y);
+            base.set(colour, x, y, penWidth);
             this.width = list[0];
             this.height = list[1];
         }
-        public Rectangle()
-        {
-        }
+
+        public Rectangle() : base(){}
     }
 }

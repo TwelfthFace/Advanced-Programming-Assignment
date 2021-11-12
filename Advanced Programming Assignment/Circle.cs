@@ -20,12 +20,14 @@ namespace Advanced_Programming_Assignment
                 graphicsContext.FillEllipse(brush, new System.Drawing.Rectangle(x, y, radius, radius));
             }
         }
-        public override void set(Color colour, int x, int y, params int[] list)
+
+        public override void set(Color colour, int x, int y, float penWidth = 3.0f, params int[] list)
         {
-            base.set(colour, x, y);
+            base.set(colour, x, y, penWidth);
             this.radius = list[0];
         }
 
-        public Circle() { }
+        public Circle() : base()
+        {}
     }
 }
