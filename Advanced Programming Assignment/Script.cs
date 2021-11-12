@@ -62,6 +62,9 @@ namespace Advanced_Programming_Assignment
                         forFunction.enumerateCommands(commands.ToArray());
                         forFunction.run(commandParameters[0], commandParameters[1], commandParameters[2], commandParameters[3]);
                         break;
+                    default:
+                        base.parser(line);
+                        break;
                 }
             }
             return true;
