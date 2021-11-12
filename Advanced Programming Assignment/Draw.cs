@@ -125,7 +125,7 @@ namespace Advanced_Programming_Assignment
         public void drawRectangle(int width, int length)
         {
             Shape rec = new ShapeFactory().getShape("rectangle");
-            rec.set(penColour, (int)(this.clipbound.X + this.pen.Width) - 1 + this.turtle.x, this.turtle.y + (int)this.pen.Width + 12, pen.Width, width, length);
+            rec.set(penColour, (int)(this.clipbound.X + this.pen.Width) - 1 + this.turtle.x, (int)(this.clipbound.Y) + this.turtle.y + (int)this.pen.Width, pen.Width, width, length);
             if (!this.getFillShapes())
             { 
                 rec.draw(graphicsContext);
@@ -144,7 +144,7 @@ namespace Advanced_Programming_Assignment
         public void drawCircle(int radius)
         {
             Shape circ = new ShapeFactory().getShape("circle");
-            circ.set(penColour, (int)this.clipbound.X + this.turtle.x + 3, 20 + this.turtle.y - 5, pen.Width, radius);
+            circ.set(penColour, (int)this.clipbound.X + this.turtle.x + (int)pen.Width - 1, 20 + (int)this.clipbound.Y + this.turtle.y - 17, pen.Width, radius);
             if (!this.getFillShapes())
             {
                 circ.draw(graphicsContext);

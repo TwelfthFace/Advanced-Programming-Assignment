@@ -42,7 +42,7 @@ namespace Advanced_Programming_Assignment
         {
             string command = txtCmds.Trim().ToLower();
             string[] split = command.Split(" ");
-            string[] paramsSplit = null;
+            string[] paramsSplit = { "" };
             
             try {
                 if (split.Length == 2)
@@ -53,22 +53,22 @@ namespace Advanced_Programming_Assignment
                 {
                     if (split.Length > 2)
                     {
-                        errBox.Items.Insert(0, "Too many parameters specified!");
+                        errBox.Items.Insert(0, "Too many parameters specified! Line: [" + split[0] + "]");
                         return false;
                     }
                     else
                     {
-                        if(!(split[0].Equals("reset")))
+                        if(!(split[0].Equals("reset") && !(split[0].Equals("end"))))
                         {
-                            errBox.Items.Insert(0, "No parameters specified!");
-                            return false;
+                            errBox.Items.Insert(0, "No parameters specified! Line: [" + split[0] + "]");
+                            //return false;
                         }
                     }
                 }
 
                 switch (split[0])
                 {
-                    case "rectangle":
+                    case "rect":
                         if (paramsSplit.Length > 2)
                         {
                             errBox.Items.Insert(0, "Too many parameters! [rectangle w,h]");
@@ -89,7 +89,7 @@ namespace Advanced_Programming_Assignment
                             return false;
                         }
 
-                        if (paramsSplit.Length != 1)
+                        if (paramsSplit.Length != 1 || paramsSplit[0].Equals(""))
                         {
                             errBox.Items.Insert(0, "Missing parameter! [circle c]");
                             return false;
@@ -253,7 +253,7 @@ namespace Advanced_Programming_Assignment
             }
             catch (Exception e)
             { 
-                errBox.Items.Insert(0, "ERROR: " + e.Message);   
+                errBox.Items.Insert(0, "ERROR: " + e.Message + " line: [" + split[0] + "]");   
                 return false;
             }
             return true;

@@ -51,7 +51,6 @@ namespace Advanced_Programming_Assignment
                                         commandParameters[3] = commandParametersSplit[3];
                                         if (lines[indexOfCmd + f].Equals("end"))
                                         {
-
                                             break;
                                         }
                                         commands.Add(lines[indexOfCmd + f + 1]);
@@ -63,8 +62,10 @@ namespace Advanced_Programming_Assignment
                         forFunction.run(commandParameters[0], commandParameters[1], commandParameters[2], commandParameters[3]);
                         break;
                     default:
-                        base.parser(line);
+                        if(!line.Equals("end"))
+                            base.parser(line);
                         break;
+                        
                 }
             }
             return true;

@@ -13,14 +13,14 @@ namespace Advanced_Programming_Assignment.TestProject
         public void TestDrawRectangleMethod()
         {
             Advanced_Programming_Assignment.Form1 form1 = new Form1();
-            Assert.IsTrue(form1.cmd.parser("rectangle 500,500"));
+            Assert.IsTrue(form1.cmd.parser("rect 500,500"));
         }
         [TestMethod]
         //test to see if the parser can identify when a non-numeric parameter is inputed.
         public void TestDrawRectangleIncorrectParameterMethod()
         {
             Advanced_Programming_Assignment.Form1 form1 = new Form1();
-            Assert.IsFalse(form1.cmd.parser("rectangle 500,x"));
+            Assert.IsFalse(form1.cmd.parser("rect 500,x"));
         }
         [TestMethod]
 
@@ -28,7 +28,7 @@ namespace Advanced_Programming_Assignment.TestProject
         public void TestDrawRectangleMissingParameterMethod()
         {
             Advanced_Programming_Assignment.Form1 form1 = new Form1();
-            Assert.IsFalse(form1.cmd.parser("rectangle"));
+            Assert.IsFalse(form1.cmd.parser("rect"));
         }
 
         // triangle testing functions
@@ -282,6 +282,21 @@ namespace Advanced_Programming_Assignment.TestProject
         {
             Advanced_Programming_Assignment.Form1 form1 = new Form1();
             Assert.IsFalse(form1.cmd.parser("fill"));
+        }
+        
+        
+        //test to see if script parser can process a for loop
+        [TestMethod]
+        public void TestForFunctionMethod()
+        {
+            Advanced_Programming_Assignment.Form1 form1 = new Form1();
+            Assert.IsTrue(form1.script.parser("for 0 > 10\r\nrect 250,500\r\nmoveto 10\r\nend"));
+        }
+        [TestMethod]
+        public void TestForFunctionInvalidParameterMethod()
+        {
+            Advanced_Programming_Assignment.Form1 form1 = new Form1();
+            Assert.IsFalse(form1.script.parser("for 0 > 10\r\nrect 250,x\r\nmoveto 10\r\nend"));
         }
     }
 }

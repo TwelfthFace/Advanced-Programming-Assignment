@@ -18,7 +18,10 @@ namespace Advanced_Programming_Assignment
                         {
                             if (!cmds.Equals("end"))
                             {
-                                this.cmd.parser(cmds);
+                                if (!this.cmd.parser(cmds))
+                                {
+                                    return false;
+                                }
                             }
                         }
                     }
