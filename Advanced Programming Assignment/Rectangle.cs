@@ -9,6 +9,7 @@ namespace Advanced_Programming_Assignment
     {
         protected int width, height;
 
+        //this function draws the shape.
         public override void draw(Graphics graphicsContext)
         {
             if (!fill)
@@ -21,6 +22,7 @@ namespace Advanced_Programming_Assignment
             }
         }
 
+        //this function sets the colour, position, and optionally penwidth.
         public override void set(Color colour, int x, int y, float penWidth = 3.0f, params int[] list)
         {
             base.set(colour, x, y, penWidth);

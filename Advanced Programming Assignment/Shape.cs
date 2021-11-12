@@ -33,11 +33,13 @@ namespace Advanced_Programming_Assignment
 
         public virtual void draw(Graphics graphicsContext){}
 
+        //setting to check to see if the shape shall be filled upon drawing.
         public void isFilled(bool fill) 
         {
             this.fill = fill;
         }
 
+        //this function sets the colour, position, and optionally penwidth.
         public virtual void set(Color colour, int x, int y, float penWidth = 3.0f, params int[] list)
         {
             this.penColour = colour;

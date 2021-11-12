@@ -9,6 +9,7 @@ namespace Advanced_Programming_Assignment
     {
         protected PointF[] points = {};
 
+        // default points plotted to be an equilateral triangle.
         public Triangle() : base()
         {
             PointF[] points = {
@@ -22,6 +23,8 @@ namespace Advanced_Programming_Assignment
 
             this.points = points;
         }
+
+        //draw function that draws the shape.
         public override void draw(Graphics graphicsContext)
         {
             if (!fill)
@@ -34,6 +37,7 @@ namespace Advanced_Programming_Assignment
             }
         }
 
+        //this function sets the colour, position, and optionally penwidth.
         public override void set(Color colour, int x, int y, float penWidth = 3.0f, params int[] list)
         {
             base.set(colour, x, y, penWidth);

@@ -28,12 +28,11 @@ namespace Advanced_Programming_Assignment
         {
             this.graphicsContext = g;
             this.clipbound = g.ClipBounds;
-            this.penDown = false;
             this.fillShapes = false;
             this.penColour = Color.Black;
             this.pen = new Pen(penColour, 3);
             this.brush = new SolidBrush(penColour);
-
+            
         turtle = new Turtle
             {
                 x = 0,
@@ -41,32 +40,55 @@ namespace Advanced_Programming_Assignment
                 turtleColour = this.pen
             };
         }
-
-        public bool getPendown()
+        /// <summary>
+        /// Returns the currect X setting for the pens position.
+        /// </summary>
+        /// <returns>value of turtle.x</returns>
+        public int getTurtleX()
         {
-            return this.penDown;
+            return turtle.x;
+        }
+        /// <summary>
+        /// Returns the currect Y setting for the pens position.
+        /// </summary>
+        /// <returns>value of turtle.y</returns>
+        public int getTurtleY()
+        {
+            return turtle.y;
         }
 
-        public void setPendown(bool value)
-        {
-            this.penDown = value;
-        }
-
+        /// <summary>
+        /// returns the pen that will be drawn with. Used for testing purposes.
+        /// </summary>
+        /// <returns></returns>
         public Pen getPen()
         {
             return this.pen;
         }
 
+        /// <summary>
+        /// Used to check to see if the next shape drawn will be filled or now.
+        /// </summary>
+        /// <returns>value of fillShapes</returns>
         public bool getFillShapes()
         {
             return this.fillShapes;
         }
-
+        /// <summary>
+        /// sets the fillShapes value to either true of false.
+        /// </summary>
+        /// <param name="value"></param>
         public void setFillShapes(bool value)
         {
             this.fillShapes = value;
         }
 
+        /// <summary>
+        /// Sets the pen color to a Color and as an optional specification also accepts a size parameter to set pen width.
+        /// Also sets SolidBrush to the same colour in order to keep the colour consistent between filled and non-filled shapes.
+        /// </summary>
+        /// <param name="col"></param>
+        /// <param name="size"></param>
         public void setPenColour(Color col, int size = 3)
         {
             this.penColour = col;
@@ -74,18 +96,32 @@ namespace Advanced_Programming_Assignment
             this.brush = new SolidBrush(penColour);
         }
 
+        /// <summary>
+        /// Sets the pen position to the specified values of x and y.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void moveTo(int x, int y)
         {
             this.turtle.x = x;
             this.turtle.y = y;
         }
 
+        /// <summary>
+        /// Sets the pen position incrementally to the already set positions by value of z.
+        /// </summary>
+        /// <param name="z"></param>
         public void moveTo(int z)
         {
             this.turtle.x += z;
             this.turtle.y += z;
         }
 
+        /// <summary>
+        /// The function that draws a rectangle. It sets the position of the rectangle in relation to the pens x and y setting as well as its width and length.
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="length"></param>
         public void drawRectangle(int width, int length)
         {
             Shape rec = new ShapeFactory().getShape("rectangle");
@@ -101,6 +137,10 @@ namespace Advanced_Programming_Assignment
             }
         }
 
+        /// <summary>
+        /// The function that draws a circle. It sets the position of the circle in relation to the pens x and y setting as well as its radius.
+        /// </summary>
+        /// <param name="radius"></param>
         public void drawCircle(int radius)
         {
             Shape circ = new ShapeFactory().getShape("circle");
@@ -116,6 +156,10 @@ namespace Advanced_Programming_Assignment
             }
         }
 
+        /// <summary>
+        /// The function that draws an equilateral triangle. It sets the position of the triangle in relation to the pens x and y setting as well as its size. 
+        /// </summary>
+        /// <param name="size"></param>
         public void drawTriangle(int size)
         {
             Shape tri = new ShapeFactory().getShape("triangle");
@@ -131,6 +175,13 @@ namespace Advanced_Programming_Assignment
             }
         }
 
+        /// <summary>
+        /// The function that draws a triangle in accordance to the points specified, the parameters will be added to the triangle default points.
+        /// It sets the position of the triangle in relation to the pens x and y setting as well as the points a,b,c specified.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
         public void drawTriangle(int a, int b, int c)
         {
             Shape tri = new ShapeFactory().getShape("triangle");
@@ -146,6 +197,11 @@ namespace Advanced_Programming_Assignment
             }
         }
 
+        /// <summary>
+        /// The function that draws a line between the x and y points. It sets the position of the line in relation to the pens x and y setting.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void drawLine(int x, int y)
         {
             graphicsContext.DrawLine(pen, (int)(this.clipbound.X + this.turtle.x), (int)(this.clipbound.Y + this.turtle.y), (int)(this.clipbound.X + this.turtle.x) + x, (int)(this.clipbound.Y + this.turtle.y) + y);
