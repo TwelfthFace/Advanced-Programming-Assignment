@@ -9,6 +9,7 @@ namespace Advanced_Programming_Assignment
     public class Script : Command
     {
         VariableFunction variables = null;
+        string[] keys = { "" };
 
         public Script(System.Windows.Forms.ListBox errBox, Canvas canvas):base(errBox, canvas)
         {
@@ -17,7 +18,6 @@ namespace Advanced_Programming_Assignment
             this.draw = new Draw(canvas);
             this.errBox = errBox;
             this.variables = new VariableFunction(errBox, canvas);
-            
         }
 
         public new bool parser(string txtScript)
@@ -26,32 +26,62 @@ namespace Advanced_Programming_Assignment
 
             string commands = txtScript.Trim().ToLower();
             string[] lines = commands.Split("\r\n");
-            
+            string substitutedCommand = null;
+            bool substituted = false;
+
             List<string> commandsToBeExecuted = new List<string>();
-            foreach(String cmd in lines)
+            foreach(string cmd in lines)
             {
                 commandsToBeExecuted.Add(cmd);
             }
 
-            foreach(String cmd in commandsToBeExecuted.ToArray())
+            foreach(string cmd in commandsToBeExecuted.ToArray())
             {
                
                 string[] spaceSplit = cmd.Trim().Split(" ");
-                if (spaceSplit[1].Contains("=")){
-                    variables.enumerateCommands(cmd);
-                    //variables.findValue(spaceSplit[0]);
-                    commandsToBeExecuted.Remove(cmd);
+                if(spaceSplit.Length > 1){
+                    if (spaceSplit[1].Contains("=")) {
+                        variables.enumerateCommands(cmd);
+                        this.keys = variables.getKeys();
+                        commandsToBeExecuted.Remove(cmd);
+                        continue;
+                    }
                 }
-
+                if (keys[0].Length > 0)
+                {
+                    foreach (string key in keys)
+                    {
+                        if (Regex.IsMatch(cmd, @"\b(" + key + @")\b"))
+                        {
+                            if (!spaceSplit[1].Contains("="))
+                            {
+                                string substitionCheck = cmd;
+                                foreach (string value in keys)
+                                {
+                                    substitionCheck = variables.substituteValues(substitionCheck, value);
+                                    substitutedCommand = substitionCheck;
+                                    substituted = true;
+                                }
+                            }
+                        }
+                    }
+                }
                 switch (spaceSplit[0])
                 {
                     default:
-                        base.parser(cmd);
+                        if (substituted) {
+                            base.parser(substitutedCommand);
+                            substituted = false;
+                        }
+                        else
+                        {
+                            base.parser(cmd);
+                        }
                         break;
                 }
                 commandsToBeExecuted.Remove(cmd);
             }
-
+            variables.clearKeys();
             return true;
         }
 
