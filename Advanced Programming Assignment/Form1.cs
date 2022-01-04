@@ -8,6 +8,7 @@ namespace Advanced_Programming_Assignment
 {
     public partial class Form1 : Form
     {
+        public Canvas canvas = null;
         public Graphics g = null;
         public Command cmd = null;
         public Script script = null;
@@ -17,10 +18,10 @@ namespace Advanced_Programming_Assignment
         public Form1()
         {
             InitializeComponent();
-            this.g = CreateGraphics();
-            this.g.Clip = new Region(new System.Drawing.Rectangle(txtBoxScript.Width + 50, 39, (this.Width - 530), this.Height - 71));
-            this.cmd = new Command(txtCmdLine, lstBoxRanCommands, this.g);
-            this.script = new Script(lstBoxRanCommands, this.g);
+            this.canvas = new Canvas();
+            this.g = canvas.getGraphicsContext();
+            this.cmd = new Command(txtCmdLine, lstBoxRanCommands, this.canvas);
+            this.script = new Script(lstBoxRanCommands, this.canvas);
             this.ofd.Filter = "txt files (*.txt)|*.txt";
             this.sfd.Filter = "txt files (*.txt)|*.txt";
         }
@@ -33,27 +34,16 @@ namespace Advanced_Programming_Assignment
                 script.parser(txtBoxScript.Text);
                 return;
             }
-
-            if (txtCmdLine.Text.Equals("clear"))
-            {
-                this.Invalidate();
-                txtCmdLine.Text = "";
-            } else {
-                if (txtCmdLine.Text.Equals("reset"))
+            else {
+                if (txtCmdLine.Text != string.Empty)
                 {
-                    this.Invalidate();
                     cmd.parser(txtCmdLine.Text);
+                    Refresh();
                     txtCmdLine.Text = "";
                     return;
-                } else {
-                    if (txtCmdLine.Text != string.Empty)
-                    {
-                        cmd.parser(txtCmdLine.Text);
-                        txtCmdLine.Text = "";
-                        return;
-                    }
                 }
             }
+            
         }
 
         //handles multiline scripts
@@ -61,6 +51,7 @@ namespace Advanced_Programming_Assignment
         {
             if(!txtBoxScript.Text.Equals(""))
                 script.parser(txtBoxScript.Text);
+            Refresh();
         }
 
         //opens a text file and loads it into the txtBoxScript element
@@ -87,6 +78,12 @@ namespace Advanced_Programming_Assignment
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.DrawImageUnscaled(canvas.getBitmap(), 0, 0);
         }
     }
 }

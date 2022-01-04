@@ -7,26 +7,22 @@ namespace Advanced_Programming_Assignment
 {
     public abstract class Function : FunctionInterface
     {
+        protected Canvas canvas;
         protected Graphics graphicsContext;
         public List<string> commands = new List<string>();
         protected System.Windows.Forms.ListBox errBox;
         protected Command cmd;
 
-        protected Function(System.Windows.Forms.ListBox errBox, Graphics g)
+        protected Function(System.Windows.Forms.ListBox errBox, Canvas canvas)
         {
-            this.graphicsContext = g;
+            this.canvas = canvas;
+            this.graphicsContext = canvas.getGraphicsContext();
             this.errBox = errBox;
-            this.cmd = new Command(errBox, graphicsContext);
+            this.cmd = new Command(errBox, this.canvas);
         }
 
-        public abstract bool run(params string[] parameters);
+        public abstract bool run(string parameters);
 
-        public void enumerateCommands(string[] parameters)
-        {
-            foreach (string str in parameters)
-            {
-                this.commands.Add(str);
-            }
-        }
+        public abstract void enumerateCommands(string parameters);
     }
 }

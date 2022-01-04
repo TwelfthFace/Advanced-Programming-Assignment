@@ -7,8 +7,8 @@ namespace Advanced_Programming_Assignment
     public interface FunctionInterface
     {
 
-        bool run(string[] parameters);
-        void enumerateCommands(params string[] parameters);
+        bool run(string parameters);
+        void enumerateCommands(string parameters);
 
     }
 }

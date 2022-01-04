@@ -9,7 +9,6 @@ namespace Advanced_Programming_Assignment
     {
 
         protected Turtle turtle;
-        protected bool penDown;
         protected bool fillShapes;
         protected Color penColour;
         protected Pen pen;
@@ -24,21 +23,22 @@ namespace Advanced_Programming_Assignment
 
         public Draw() { }
 
-        public Draw(Graphics g)
+        public Draw(Canvas canvas)
         {
-            this.graphicsContext = g;
-            this.clipbound = g.ClipBounds;
+            this.canvas = canvas;
+            this.graphicsContext = canvas.getGraphicsContext();
             this.fillShapes = false;
             this.penColour = Color.Black;
             this.pen = new Pen(penColour, 3);
             this.brush = new SolidBrush(penColour);
-            
-        turtle = new Turtle
+
+            turtle = new Turtle
             {
-                x = 0,
-                y = 0,
+                x = (int)(0 + pen.Width),
+                y = (int)(0 + pen.Width),
                 turtleColour = this.pen
             };
+
         }
         /// <summary>
         /// Returns the currect X setting for the pens position.
@@ -120,12 +120,12 @@ namespace Advanced_Programming_Assignment
         /// <summary>
         /// The function that draws a rectangle. It sets the position of the rectangle in relation to the pens x and y setting as well as its width and length.
         /// </summary>
-        /// <param name="width"></param>
-        /// <param name="length"></param>
-        public void drawRectangle(int width, int length)
+        /// <param name="width">Width of the rectangle.</param>
+        /// <param name="height">Height of the rectangle</param>
+        public void drawRectangle(int width, int height)
         {
             Shape rec = new ShapeFactory().getShape("rectangle");
-            rec.set(penColour, (int)(this.clipbound.X + this.pen.Width) - 1 + this.turtle.x, (int)(this.clipbound.Y) + this.turtle.y + (int)this.pen.Width, pen.Width, width, length);
+            rec.set(penColour, this.turtle.x, this.turtle.y, pen.Width, width, height);
             if (!this.getFillShapes())
             { 
                 rec.draw(graphicsContext);
@@ -144,7 +144,7 @@ namespace Advanced_Programming_Assignment
         public void drawCircle(int radius)
         {
             Shape circ = new ShapeFactory().getShape("circle");
-            circ.set(penColour, (int)this.clipbound.X + this.turtle.x + (int)pen.Width - 1, 20 + (int)this.clipbound.Y + this.turtle.y - 17, pen.Width, radius);
+            circ.set(penColour, this.turtle.x, this.turtle.y, pen.Width, radius);
             if (!this.getFillShapes())
             {
                 circ.draw(graphicsContext);
@@ -163,7 +163,7 @@ namespace Advanced_Programming_Assignment
         public void drawTriangle(int size)
         {
             Shape tri = new ShapeFactory().getShape("triangle");
-            tri.set(penColour, (int)this.clipbound.X + this.turtle.x + 3, (int)this.clipbound.Y + 20 +  this.turtle.y - 5, pen.Width, size);
+            tri.set(penColour, this.turtle.x, this.turtle.y, pen.Width, size);
             if (!this.getFillShapes())
             {
                 tri.draw(graphicsContext);
@@ -185,7 +185,7 @@ namespace Advanced_Programming_Assignment
         public void drawTriangle(int a, int b, int c)
         {
             Shape tri = new ShapeFactory().getShape("triangle");
-            tri.set(penColour, (int)(this.clipbound.X + this.turtle.x) + 3, 20 + ((int)this.clipbound.Y + 20 + this.turtle.y) - 5, pen.Width, a, b, c);
+            tri.set(penColour, this.turtle.x, this.turtle.y, pen.Width, a,b,c);
             if (!this.getFillShapes())
             {
                 tri.draw(graphicsContext);
@@ -204,7 +204,15 @@ namespace Advanced_Programming_Assignment
         /// <param name="y"></param>
         public void drawLine(int x, int y)
         {
-            graphicsContext.DrawLine(pen, (int)(this.clipbound.X + this.turtle.x), (int)(this.clipbound.Y + this.turtle.y), (int)(this.clipbound.X + this.turtle.x) + x, (int)(this.clipbound.Y + this.turtle.y) + y);
+            graphicsContext.DrawLine(pen, this.turtle.x, this.turtle.y, this.turtle.x + x, this.turtle.y + y);
         }
+
+        public void reset()
+        {
+            this.turtle.x = (int)(0 + pen.Width);
+            this.turtle.y = (int)(0 + pen.Width);
+            this.canvas.clearCanvas();
+        }
+
     }
 }

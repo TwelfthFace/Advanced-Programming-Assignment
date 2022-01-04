@@ -7,13 +7,14 @@ namespace Advanced_Programming_Assignment
 {
     public class FunctionFactory
     {
-
+        protected Canvas canvas;
         protected Graphics graphicsContext;
         protected System.Windows.Forms.ListBox errBox;
 
-        public FunctionFactory(System.Windows.Forms.ListBox errBox, Graphics g)
+        public FunctionFactory(System.Windows.Forms.ListBox errBox, Canvas canvas)
         {
-            this.graphicsContext = g;
+            this.canvas = canvas;
+            this.graphicsContext = canvas.getGraphicsContext();
             this.errBox = errBox;
         }
 
@@ -23,7 +24,7 @@ namespace Advanced_Programming_Assignment
             switch (function)
             {
                 case "for":
-                    return new ForFunction(errBox, graphicsContext);
+                    return new ForFunction(errBox, this.canvas);
                 default:
                     throw new NotImplementedException();
             }

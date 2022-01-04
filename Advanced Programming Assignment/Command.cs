@@ -9,25 +9,24 @@ namespace Advanced_Programming_Assignment
     //class to define commands and facilitate appropriate feature expansion.
     public class Command
     {
-        public Draw draw;
-        protected Script script;
+        protected Draw draw;
         protected Graphics graphicsContext;
-        protected RectangleF clipbound;
+        protected Canvas canvas;
         protected System.Windows.Forms.ListBox errBox;
 
-        public Command(System.Windows.Forms.ListBox errBox, Graphics g)
+        public Command(System.Windows.Forms.ListBox errBox, Canvas canvas)
         {
-            this.graphicsContext = g;
-            this.draw = new Draw(graphicsContext);
+            this.canvas = canvas;
+            this.graphicsContext = canvas.getGraphicsContext();
+            this.draw = new Draw(canvas);
             this.errBox = errBox;
         }
 
-        public Command(System.Windows.Forms.TextBox txtCmdLine, System.Windows.Forms.ListBox errBox, Graphics graphics)
+        public Command(System.Windows.Forms.TextBox txtCmdLine, System.Windows.Forms.ListBox errBox, Canvas canvas)
         {
-            this.graphicsContext = graphics;
-            this.clipbound = graphicsContext.ClipBounds;
-            this.draw = new Draw(graphicsContext);
-            this.script = new Script(errBox, graphicsContext);
+            this.canvas = canvas;
+            this.graphicsContext = canvas.getGraphicsContext();
+            this.draw = new Draw(canvas);
             this.errBox = errBox;
         }
 
@@ -58,7 +57,7 @@ namespace Advanced_Programming_Assignment
                     }
                     else
                     {
-                        if(!(split[0].Equals("reset") && !(split[0].Equals("end"))))
+                        if(!(split[0].Equals("reset") || !(split[0].Equals("end")) || !(split[0].Equals("clear"))))
                         {
                             errBox.Items.Insert(0, "No parameters specified! Line: [" + split[0] + "]");
                             //return false;
@@ -240,8 +239,12 @@ namespace Advanced_Programming_Assignment
 
                         draw.drawLine(Int32.Parse(paramsSplit[0]), Int32.Parse(paramsSplit[1]));
                         break;
+                    case "clear":
+                        canvas.clearCanvas();
+                        break;
                     case "reset":
-                        draw.moveTo(0, 0);
+                        canvas.clearCanvas();
+                        draw.reset();
                         draw.setFillShapes(false);
                         draw.setPenColour(Color.Black);
                         errBox.Items.Clear();

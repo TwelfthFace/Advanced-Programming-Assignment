@@ -9,10 +9,11 @@ namespace Advanced_Programming_Assignment
     public class Script : Command
     {
 
-        public Script(System.Windows.Forms.ListBox errBox, Graphics graphics)
+        public Script(System.Windows.Forms.ListBox errBox, Canvas canvas):base(errBox, canvas)
         {
-            this.graphicsContext = graphics;
-            this.draw = new Draw(graphics);
+            this.canvas = canvas;
+            this.graphicsContext = canvas.getGraphicsContext();
+            this.draw = new Draw(canvas);
             this.errBox = errBox;
         }
 
@@ -20,56 +21,84 @@ namespace Advanced_Programming_Assignment
         {
             errBox.Items.Clear();
 
-            string command = txtScript.Trim().ToLower();
-            string[] lines = command.Split("\r\n");
-            string[] commandParameters = {"","","",""};
-            List<string> commands = new List<string>();
-            int indexOfCmd = 0; //Array.IndexOf(lines, "for");
-
-            foreach (string line in lines)
+            string commands = txtScript.Trim().ToLower();
+            string[] lines = commands.Split("\r\n");
+            
+            List<string> commandsToBeExecuted = new List<string>();
+            foreach(String cmd in lines)
             {
-                string[] split = line.Split(" ");
-
-                switch (split[0])
-                {
-                    case "for":
-                        for (int i = 0; i < lines.Length; i++)
-                        {
-                            if (Regex.IsMatch(lines[i], @"\b(for)\b"))
-                            {
-                                indexOfCmd = i;
-                            }
-
-                                if (Regex.IsMatch(lines[i], @"\b(for)\b")) 
-                                {
-                                    for (int f = i; i < lines.Length; f++)
-                                    {
-                                        string[] commandParametersSplit = lines[i].Split(" ");
-                                        commandParameters[0] = commandParametersSplit[0];
-                                        commandParameters[1] = commandParametersSplit[1];
-                                        commandParameters[2] = commandParametersSplit[2];
-                                        commandParameters[3] = commandParametersSplit[3];
-                                        if (lines[indexOfCmd + f].Equals("end"))
-                                        {
-                                            break;
-                                        }
-                                        commands.Add(lines[indexOfCmd + f + 1]);
-                                    }
-                                }
-                        }
-                        Function forFunction = new FunctionFactory(errBox, graphicsContext).getFunction("for");
-                        forFunction.enumerateCommands(commands.ToArray());
-                        forFunction.run(commandParameters[0], commandParameters[1], commandParameters[2], commandParameters[3]);
-                        break;
-                    default:
-                        if(!line.Equals("end"))
-                            base.parser(line);
-                        break;
-                        
-                }
+                commandsToBeExecuted.Add(cmd);
             }
+
+            foreach(String cmd in commandsToBeExecuted.ToArray())
+            {
+                string[] spaceSplit = cmd.Split(" ");
+                switch (spaceSplit[0])
+                {
+                    default:
+                        base.parser(cmd);
+                        break;
+                }
+                commandsToBeExecuted.Remove(cmd);
+            }
+
             return true;
         }
+
+        //public new bool parser(string txtScript)
+        //{
+        //    errBox.Items.Clear();
+
+        //    string command = txtScript.Trim().ToLower();
+        //    string[] lines = command.Split("\r\n");
+        //    string[] commandParameters = {"","","",""};
+        //    List<string> commands = new List<string>();
+        //    int indexOfCmd = 0; //Array.IndexOf(lines, "for");
+
+        //    foreach (string line in lines)
+        //    {
+        //        string[] split = line.Split(" ");
+
+        //        switch (split[0])
+        //        {
+        //            case "for":
+        //                for (int i = 0; i < lines.Length; i++)
+        //                {
+        //                    if (Regex.IsMatch(lines[i], @"\b(for)\b"))
+        //                    {
+        //                        indexOfCmd = i;
+        //                    }
+
+        //                        if (Regex.IsMatch(lines[i], @"\b(for)\b")) 
+        //                        {
+        //                            for (int f = i; i < lines.Length; f++)
+        //                            {
+        //                                string[] commandParametersSplit = lines[i].Split(" ");
+        //                                commandParameters[0] = commandParametersSplit[0];
+        //                                commandParameters[1] = commandParametersSplit[1];
+        //                                commandParameters[2] = commandParametersSplit[2];
+        //                                commandParameters[3] = commandParametersSplit[3];
+        //                                if (lines[indexOfCmd + f].Equals("end"))
+        //                                {
+        //                                    break;
+        //                                }
+        //                                commands.Add(lines[indexOfCmd + f + 1]);
+        //                            }
+        //                        }
+        //                }
+        //                Function forFunction = new FunctionFactory(errBox, canvas).getFunction("for");
+        //                forFunction.enumerateCommands(commands.ToArray());
+        //                forFunction.run(commandParameters[0], commandParameters[1], commandParameters[2], commandParameters[3]);
+        //                break;
+        //            default:
+        //                if(!line.Equals("end"))
+        //                    base.parser(line);
+        //                break;
+                        
+        //        }
+        //    }
+        //    return true;
+        //}
 
         //public new bool parser(string txtScript, System.Windows.Forms.ListBox errout)
         //{

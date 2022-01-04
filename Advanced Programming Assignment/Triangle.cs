@@ -20,7 +20,6 @@ namespace Advanced_Programming_Assignment
                 //right point
                 new Point((this.x + 100) + this.x, 100 + this.y)
             };
-
             this.points = points;
         }
 
@@ -48,7 +47,6 @@ namespace Advanced_Programming_Assignment
                 this.points[1] = new Point((this.x + this.y) + this.x + list[1], this.y + this.x + list[1]);
                 //right
                 this.points[2] = new Point(this.x + list[2], this.x + this.y + list[2]);
-
             }
             else
             {
