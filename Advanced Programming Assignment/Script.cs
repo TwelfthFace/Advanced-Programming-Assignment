@@ -8,6 +8,7 @@ namespace Advanced_Programming_Assignment
 {
     public class Script : Command
     {
+        VariableFunction variables = null;
 
         public Script(System.Windows.Forms.ListBox errBox, Canvas canvas):base(errBox, canvas)
         {
@@ -15,6 +16,8 @@ namespace Advanced_Programming_Assignment
             this.graphicsContext = canvas.getGraphicsContext();
             this.draw = new Draw(canvas);
             this.errBox = errBox;
+            this.variables = new VariableFunction(errBox, canvas);
+            
         }
 
         public new bool parser(string txtScript)
@@ -32,7 +35,14 @@ namespace Advanced_Programming_Assignment
 
             foreach(String cmd in commandsToBeExecuted.ToArray())
             {
-                string[] spaceSplit = cmd.Split(" ");
+               
+                string[] spaceSplit = cmd.Trim().Split(" ");
+                if (spaceSplit[1].Contains("=")){
+                    variables.enumerateCommands(cmd);
+                    //variables.findValue(spaceSplit[0]);
+                    commandsToBeExecuted.Remove(cmd);
+                }
+
                 switch (spaceSplit[0])
                 {
                     default:

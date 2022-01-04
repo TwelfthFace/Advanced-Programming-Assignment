@@ -14,11 +14,19 @@ namespace Advanced_Programming_Assignment
             throw new NotImplementedException();
         }
 
+        public string findValue(string key)
+        {
+            string value;
+            keyValuePairs.TryGetValue(key, out value);
+            return value;
+        }
+
         public override void enumerateCommands(string parameters)
         {
             string[] keyValue = parameters.Split("=");
-            keyValuePairs.Add(keyValue[0], keyValue[2]);
-         
+            string key = keyValue[0].Trim();
+            string value = keyValue[1].Trim();
+            keyValuePairs.Add(key, value);
         }
 
         public VariableFunction(ListBox errBox, Canvas canvas) : base(errBox, canvas){}
