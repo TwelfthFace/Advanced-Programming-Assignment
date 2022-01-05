@@ -8,7 +8,7 @@ namespace Advanced_Programming_Assignment
 {
     public class VariableFunction : Function
     {
-       protected Dictionary<string,string> keyValuePairs = new Dictionary<string,string>();
+       protected Dictionary<string,int> keyValuePairs = new Dictionary<string, int>();
 
         public override bool run(string parameters)
         {
@@ -30,11 +30,25 @@ namespace Advanced_Programming_Assignment
             keyValuePairs.Clear();
         }
 
-        public string findValue(string key)
+        public void iterateValues(string command)
         {
-            string value;
-            keyValuePairs.TryGetValue(key, out value);
-            return value;
+            List<string> keys = new List<string>();
+
+            foreach (string key in keyValuePairs.Keys)
+            {
+                if (!keys.Contains(key)) {
+                    keys.Add(key);
+                }
+            }
+            foreach (string key in keys)
+            {
+                if (command.Contains(key + "++"))
+                {
+                    int value = keyValuePairs[key];
+                    int iterator = value+1;
+                    keyValuePairs[key] = iterator;
+                }
+            }
         }
 
         public string substituteValues(string[] commands)
@@ -46,7 +60,7 @@ namespace Advanced_Programming_Assignment
             }
             foreach (string key in keyValuePairs.Keys)
             {
-                substitutedCommands = Regex.Replace(substitutedCommands, @"\b(" + key + @")\b", findValue(key), RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline, TimeSpan.FromSeconds(.25));
+                substitutedCommands = Regex.Replace(substitutedCommands, @"\b(" + key + @")\b", keyValuePairs[key].ToString(), RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline, TimeSpan.FromSeconds(.25));
             }
             return substitutedCommands;
         }
@@ -58,7 +72,7 @@ namespace Advanced_Programming_Assignment
             string value = keyValue[1].Trim();
             if (!keyValuePairs.ContainsKey(key))
             {
-                keyValuePairs.Add(key, value);
+                keyValuePairs.Add(key, int.Parse(value));
             }
         }
 

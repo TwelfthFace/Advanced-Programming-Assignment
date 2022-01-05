@@ -37,15 +37,15 @@ namespace Advanced_Programming_Assignment
             foreach (string cmd in lines)
             {
                 string[] spaceSplit = cmd.Trim().Split(" ");
-                if (spaceSplit.Length > 1)
+                if (cmd.Contains("="))
                 {
-                    if (spaceSplit[1].Contains("="))
-                    {
-                        variables.enumerateCommands(cmd);
-                        this.keys = variables.getKeys();
-                        commandsToBeExecuted.Remove(cmd);
-                        continue;
-                    }
+                    variables.enumerateCommands(cmd);
+                    commandsToBeExecuted.Remove(cmd);
+                }
+                if (cmd.Contains("++"))
+                {
+                    variables.iterateValues(cmd);
+                    commandsToBeExecuted.Remove(cmd);
                 }
             }
             substitutedScript = variables.substituteValues(commandsToBeExecuted.ToArray());
