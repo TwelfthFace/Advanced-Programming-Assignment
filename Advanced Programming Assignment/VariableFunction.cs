@@ -18,6 +18,7 @@ namespace Advanced_Programming_Assignment
         public string[] getKeys()
         {
             List<string> keys = new List<string>();
+
             foreach (string key in keyValuePairs.Keys)
             {
                 keys.Add(key);
@@ -32,15 +33,7 @@ namespace Advanced_Programming_Assignment
 
         public void iterateValues(string command)
         {
-            List<string> keys = new List<string>();
-
-            foreach (string key in keyValuePairs.Keys)
-            {
-                if (!keys.Contains(key)) {
-                    keys.Add(key);
-                }
-            }
-            foreach (string key in keys)
+            foreach (string key in this.getKeys())
             {
                 if (command.Contains(key + "++"))
                 {
@@ -51,9 +44,43 @@ namespace Advanced_Programming_Assignment
             }
         }
 
+        public void addValues(string command)
+        {
+            List<string> keys = new List<string>();
+            foreach(string key in this.getKeys())
+            {
+                keys.Add(key.Trim());
+            }
+            foreach (string key in keys)
+            {
+                if (command.Contains(key+" +")){
+                    string op = key;
+                    foreach (string value in keys)
+                    {
+                        if (value.Equals(op)) {
+                            string[] additionSum = command.Split('+');
+                            string addition = additionSum[1].Trim();
+                            int add = keyValuePairs[op];
+                            int iterator = 0;
+                            if (keys.Contains(addition))
+                            {
+                                iterator = add + keyValuePairs[addition];
+                            }
+                            else
+                            {
+                                iterator = add + int.Parse(addition);
+                            }
+                            keyValuePairs[key] = iterator;
+                        }
+                    }
+                }
+            }
+        }
+
         public string substituteValues(string[] commands)
         {
             string substitutedCommands = null;
+
             foreach (string cmd in commands)
             {
                 substitutedCommands += cmd+"\r\n";
@@ -70,6 +97,7 @@ namespace Advanced_Programming_Assignment
             string[] keyValue = parameters.Split("=");
             string key = keyValue[0].Trim();
             string value = keyValue[1].Trim();
+
             if (!keyValuePairs.ContainsKey(key))
             {
                 keyValuePairs.Add(key, int.Parse(value));
