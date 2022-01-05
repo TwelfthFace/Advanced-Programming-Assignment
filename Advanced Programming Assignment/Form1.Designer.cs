@@ -84,6 +84,7 @@ namespace Advanced_Programming_Assignment
             // lstBoxRanCommands
             // 
             this.lstBoxRanCommands.FormattingEnabled = true;
+            this.lstBoxRanCommands.HorizontalScrollbar = true;
             this.lstBoxRanCommands.ItemHeight = 20;
             this.lstBoxRanCommands.Location = new System.Drawing.Point(13, 761);
             this.lstBoxRanCommands.Name = "lstBoxRanCommands";

@@ -37,11 +37,18 @@ namespace Advanced_Programming_Assignment
             return value;
         }
 
-        public string substituteValues(string command, string value)
+        public string substituteValues(string[] commands)
         {
-            //bool regexCommand = Regex.IsMatch(command, @"\b(" + value + @")\b");
-            string regexCommand = Regex.Replace(command, @"\b(" + value + @")\b", findValue(value), RegexOptions.IgnorePatternWhitespace, TimeSpan.FromSeconds(.25));
-            return regexCommand;
+            string substitutedCommands = null;
+            foreach (string cmd in commands)
+            {
+                substitutedCommands += cmd+"\r\n";
+            }
+            foreach (string key in keyValuePairs.Keys)
+            {
+                substitutedCommands = Regex.Replace(substitutedCommands, @"\b(" + key + @")\b", findValue(key), RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline, TimeSpan.FromSeconds(.25));
+            }
+            return substitutedCommands;
         }
 
         public override void enumerateCommands(string parameters)

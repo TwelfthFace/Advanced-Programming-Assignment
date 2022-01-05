@@ -26,60 +26,44 @@ namespace Advanced_Programming_Assignment
 
             string commands = txtScript.Trim().ToLower();
             string[] lines = commands.Split("\r\n");
-            string substitutedCommand = null;
-            bool substituted = false;
-
+            string substitutedScript = null;
+            string[] substitutedScriptLines = null;
             List<string> commandsToBeExecuted = new List<string>();
+
             foreach(string cmd in lines)
             {
                 commandsToBeExecuted.Add(cmd);
             }
-
-            foreach(string cmd in commandsToBeExecuted.ToArray())
+            foreach (string cmd in lines)
             {
-               
                 string[] spaceSplit = cmd.Trim().Split(" ");
-                if(spaceSplit.Length > 1){
-                    if (spaceSplit[1].Contains("=")) {
+                if (spaceSplit.Length > 1)
+                {
+                    if (spaceSplit[1].Contains("="))
+                    {
                         variables.enumerateCommands(cmd);
                         this.keys = variables.getKeys();
                         commandsToBeExecuted.Remove(cmd);
                         continue;
                     }
                 }
-                if (keys[0].Length > 0)
-                {
-                    foreach (string key in keys)
-                    {
-                        if (Regex.IsMatch(cmd, @"\b(" + key + @")\b"))
-                        {
-                            if (!spaceSplit[1].Contains("="))
-                            {
-                                string substitionCheck = cmd;
-                                foreach (string value in keys)
-                                {
-                                    substitionCheck = variables.substituteValues(substitionCheck, value);
-                                    substitutedCommand = substitionCheck;
-                                    substituted = true;
-                                }
-                            }
-                        }
-                    }
-                }
+            }
+            substitutedScript = variables.substituteValues(commandsToBeExecuted.ToArray());
+            substitutedScriptLines = substitutedScript.Split("\r\n");
+            commandsToBeExecuted.Clear();
+            foreach (string line in substitutedScriptLines)
+            {
+                commandsToBeExecuted.Add(line.Trim());
+            }
+            foreach (string cmd in commandsToBeExecuted.ToArray())
+            {
+                string[] spaceSplit = cmd.Trim().Split(" ");
                 switch (spaceSplit[0])
                 {
                     default:
-                        if (substituted) {
-                            base.parser(substitutedCommand);
-                            substituted = false;
-                        }
-                        else
-                        {
-                            base.parser(cmd);
-                        }
+                        base.parser(cmd);
                         break;
                 }
-                commandsToBeExecuted.Remove(cmd);
             }
             variables.clearKeys();
             return true;
@@ -137,34 +121,6 @@ namespace Advanced_Programming_Assignment
                         
         //        }
         //    }
-        //    return true;
-        //}
-
-        //public new bool parser(string txtScript, System.Windows.Forms.ListBox errout)
-        //{
-        //    errout.Items.Clear();
-
-        //    string command = txtScript.Trim().ToLower();
-        //    string[] lines = command.Split("\r");
-        //    List<string> commands = new List<string>();
-
-        //    for (int i = 0; i < lines.Length; i++)
-        //    {
-        //        string formatLine = lines[i].Replace("\n", "");
-        //        commands.Add(formatLine);
-        //        if (i == lines.Length)
-        //        {
-        //            switch (formatLine)
-        //            {
-        //                case "for":
-        //                    Function forFunction = new FunctionFactory().getFunction("for");
-        //                    forFunction.enumerateParameters(commands.ToArray());
-        //                    break;
-        //            }
-        //            base.parser(formatLine, errout);
-        //        }
-        //    }
-
         //    return true;
         //}
 

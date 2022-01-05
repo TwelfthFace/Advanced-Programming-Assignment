@@ -42,11 +42,11 @@ namespace Advanced_Programming_Assignment
             base.set(colour, x, y, penWidth);
             if (list.Length == 3) {
                 //top
-                this.points[0] = new Point(((this.x + this.y) + this.x / 2) + list[0], this.y);
+                this.points[0] = new Point(list[0] + (list[0] / 2) + this.x, list[0]+this.y);
                 //left
-                this.points[1] = new Point((this.x + this.y) + this.x + list[1], this.y + this.x + list[1]);
+                this.points[1] = new Point(list[0] + this.x, list[2]+this.y);
                 //right
-                this.points[2] = new Point(this.x + list[2], this.x + this.y + list[2]);
+                this.points[2] = new Point(list[1] + this.x, list[2]+this.y);
             }
             else
             {
@@ -55,7 +55,7 @@ namespace Advanced_Programming_Assignment
                     //top
                     this.points[0] = new Point(((this.x + this.y) + this.x / 2) + list[0], this.y);
                     //left
-                    this.points[1] = new Point((this.x + this.y) + this.x  + list[0], this.y + this.x + list[0]);
+                    this.points[1] = new Point(this.x - list[0], this.y + this.x + list[0]);
                     //right
                     this.points[2] = new Point(this.x + list[0], this.x + this.y + list[0]);
                 }

@@ -43,6 +43,11 @@ namespace Advanced_Programming_Assignment
             string[] split = command.Split(" ");
             string[] paramsSplit = { "" };
             
+            if(split[split.Length - 1].Equals(""))
+            {
+                return false;
+            }
+
             try {
                 if (split.Length == 2)
                 {
@@ -52,14 +57,14 @@ namespace Advanced_Programming_Assignment
                 {
                     if (split.Length > 2)
                     {
-                        errBox.Items.Insert(0, "Too many parameters specified! Line: [" + split[0] + "]");
+                        errBox.Items.Insert(0, "Too many parameters specified! Line: " + txtCmds);
                         return false;
                     }
                     else
                     {
                         if(!(split[0].Equals("reset") || !(split[0].Equals("end")) || !(split[0].Equals("clear"))))
                         {
-                            errBox.Items.Insert(0, "No parameters specified! Line: [" + split[0] + "]");
+                            errBox.Items.Insert(0, "No parameters specified! Line: " + txtCmds);
                             //return false;
                         }
                     }
@@ -70,13 +75,12 @@ namespace Advanced_Programming_Assignment
                     case "rect":
                         if (paramsSplit.Length > 2)
                         {
-                            errBox.Items.Insert(0, "Too many parameters! [rectangle w,h]");
+                            errBox.Items.Insert(0, "Too many parameters! [rectangle w,h]: " + txtCmds);
                             return false;
                         }
-
                         if (paramsSplit.Length != 2)
                         {
-                            errBox.Items.Insert(0, "Missing parameters! [rectangle w,h]");
+                            errBox.Items.Insert(0, "Missing parameters! [rectangle w,h]: " + txtCmds);
                             return false;
                         }
                         draw.drawRectangle(Int32.Parse(paramsSplit[0]), Int32.Parse(paramsSplit[1]));
@@ -84,13 +88,12 @@ namespace Advanced_Programming_Assignment
                     case "circle":
                         if (paramsSplit.Length > 1)
                         {
-                            errBox.Items.Insert(0, "Too many parameters! [circle c]");
+                            errBox.Items.Insert(0, "Too many parameters! [circle c]: " + txtCmds);
                             return false;
                         }
-
                         if (paramsSplit.Length != 1 || paramsSplit[0].Equals(""))
                         {
-                            errBox.Items.Insert(0, "Missing parameter! [circle c]");
+                            errBox.Items.Insert(0, "Missing parameter! [circle c]: " + txtCmds);
                             return false;
                         }
                         draw.drawCircle(Int32.Parse(paramsSplit[0]));
@@ -98,21 +101,18 @@ namespace Advanced_Programming_Assignment
                     case "moveto":
                         if (paramsSplit.Length > 2)
                         {
-                            errBox.Items.Insert(0, "Too many parameters! [moveto x,y] or [moveto x]");
+                            errBox.Items.Insert(0, "Too many parameters! [moveto x,y] or [moveto x]: " + txtCmds);
                             return false;
                         }
-
                         if (paramsSplit.Length != 1 && paramsSplit.Length != 2)
                         {
-                            errBox.Items.Insert(0, "Missing parameters! [moveto x,y] or [moveto x]");
+                            errBox.Items.Insert(0, "Missing parameters! [moveto x,y] or [moveto x]: " + txtCmds);
                             return false;
                         }
-
                         if (paramsSplit.Length == 2)
                         {
                             draw.moveTo(Int32.Parse(paramsSplit[0]), Int32.Parse(paramsSplit[1]));
                         }
-
                         if (paramsSplit.Length == 1)
                         {
                             draw.moveTo(Int32.Parse(paramsSplit[0]));
@@ -121,36 +121,30 @@ namespace Advanced_Programming_Assignment
                     case "triangle":
                         if (paramsSplit.Length > 3)
                         {
-                            errBox.Items.Insert(0, "Too many parameters! [triangle a,b,c] or [triangle s]");
+                            errBox.Items.Insert(0, "Too many parameters! [triangle a,b,c] or [triangle s]: " + txtCmds);
                             return false;
                         }
-
                         if (paramsSplit.Length != 3 && paramsSplit.Length != 1)
                         {
-                            errBox.Items.Insert(0, "Missing parameters! [triangle a,b,c] or [triangle s]");
+                            errBox.Items.Insert(0, "Missing parameters! [triangle a,b,c] or [triangle s]: " + txtCmds);
                             return false;
                         }
-                        
                         if(paramsSplit.Length == 1)
                             draw.drawTriangle(Int32.Parse(paramsSplit[0]));
-                        
                         if(paramsSplit.Length == 3)
                             draw.drawTriangle(Int32.Parse(paramsSplit[0]), Int32.Parse(paramsSplit[1]), Int32.Parse(paramsSplit[2]));
-                        
                         break;
                     case "pen":
                         if (paramsSplit.Length > 2)
                         {
-                            errBox.Items.Insert(0, "Too many parameters! [setcolour colour,{pensize}]");
+                            errBox.Items.Insert(0, "Too many parameters! [setcolour colour,{pensize}]: " + txtCmds);
                             return false;
                         }
-
                         if (paramsSplit.Length != 1 && paramsSplit.Length != 2)
                         {
-                            errBox.Items.Insert(0, "Missing parameter! [setcolour colour,{pensize}]");
+                            errBox.Items.Insert(0, "Missing parameter! [setcolour colour,{pensize}]: " + txtCmds);
                             return false;
                         }
-
                         switch (paramsSplit[0])
                         {
                             case "black":
@@ -169,7 +163,7 @@ namespace Advanced_Programming_Assignment
                                 draw.setPenColour(Color.Yellow);
                                 break;
                             default:
-                                errBox.Items.Insert(0, "Unknown Colour!");
+                                errBox.Items.Insert(0, "Unknown Colour!: " + txtCmds);
                                 return false;
                         }
                         if (paramsSplit.Length == 2)
@@ -192,7 +186,7 @@ namespace Advanced_Programming_Assignment
                                     draw.setPenColour(Color.Yellow, Int32.Parse(paramsSplit[1]));
                                     break;
                                 default:
-                                    errBox.Items.Insert(0, "Unknown Colour!");
+                                    errBox.Items.Insert(0, "Unknown Colour!: " + txtCmds);
                                     return false;
                             }
                         }
@@ -200,43 +194,37 @@ namespace Advanced_Programming_Assignment
                     case "fill":
                         if (paramsSplit.Length > 1)
                         {
-                            errBox.Items.Insert(0, "Too many parameters! [fill 1 | true | 0 | false]");
+                            errBox.Items.Insert(0, "Too many parameters! [fill 1 | true | 0 | false]: " + txtCmds);
                             return false;
                         }
-
                         if (paramsSplit.Length != 1)
                         {
-                            errBox.Items.Insert(0, "Missing parameters! [fill 1 | true | 0 | false]");
+                            errBox.Items.Insert(0, "Missing parameters! [fill 1 | true | 0 | false]: " + txtCmds);
                             return false;
                         }
-
                         if (paramsSplit[0].Equals("1") || paramsSplit[0].Equals("true"))
                         {
                             draw.setFillShapes(true);
                             return true;
                         }
-
                         if (paramsSplit[0].Equals("0") || paramsSplit[0].Equals("false"))
                         {
                             draw.setFillShapes(false);
                             return true;
                         }
-
-                        errBox.Items.Insert(0, "Unknown Parameter Supplied! Expecting one of '1, true, 0, false'.");
+                        errBox.Items.Insert(0, "Unknown Parameter Supplied! Expecting one of '1, true, 0, false': " + txtCmds);
                         return false;
                     case "drawto":
                         if (paramsSplit.Length > 2)
                         {
-                            errBox.Items.Insert(0, "Too many parameters! [drawto x,y]");
+                            errBox.Items.Insert(0, "Too many parameters! [drawto x,y]: " + txtCmds);
                             return false;
                         }
-
                         if (paramsSplit.Length != 2)
                         {
-                            errBox.Items.Insert(0, "Missing parameters! [drawto x,y]");
+                            errBox.Items.Insert(0, "Missing parameters! [drawto x,y]: " + txtCmds);
                             return false;
                         }
-
                         draw.drawLine(Int32.Parse(paramsSplit[0]), Int32.Parse(paramsSplit[1]));
                         break;
                     case "clear":
@@ -250,13 +238,13 @@ namespace Advanced_Programming_Assignment
                         errBox.Items.Clear();
                         break;
                     default:
-                        errBox.Items.Insert(0, "Unknown Command! \"" + split[0] +"\"");
+                        errBox.Items.Insert(0, "Unknown Command! \"" + txtCmds + "\"");
                         return false;
                 }
             }
             catch (Exception e)
             { 
-                errBox.Items.Insert(0, "ERROR: " + e.Message + " line: [" + split[0] + "]");   
+                errBox.Items.Insert(0, "ERROR: " + e.Message + " line: [" + txtCmds + "]");   
                 return false;
             }
             return true;
