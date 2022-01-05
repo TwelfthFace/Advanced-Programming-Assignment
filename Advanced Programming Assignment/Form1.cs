@@ -29,27 +29,34 @@ namespace Advanced_Programming_Assignment
         //handles single line commands
         private void btnGo_MouseClick(object sender, MouseEventArgs e)
         {
+            if (clearOnRunToolStripMenuItem.Checked)
+            {
+                script.parser("clear");
+            }
+
             if (txtCmdLine.Text.Equals("run"))
             {
                 script.parser(txtBoxScript.Text);
-                return;
             }
             else {
                 if (txtCmdLine.Text != string.Empty)
                 {
                     cmd.parser(txtCmdLine.Text);
-                    Refresh();
                     txtCmdLine.Text = "";
-                    return;
                 }
             }
-            
+            Refresh();
         }
 
         //handles multiline scripts
         private void btnRunScript_Click(object sender, EventArgs e)
         {
-            if(!txtBoxScript.Text.Equals(""))
+            if (clearOnRunToolStripMenuItem.Checked)
+            {
+                script.parser("clear");
+            }
+
+            if (!txtBoxScript.Text.Equals(""))
                 script.parser(txtBoxScript.Text);
             Refresh();
         }
@@ -84,6 +91,18 @@ namespace Advanced_Programming_Assignment
         {
             Graphics g = e.Graphics;
             g.DrawImageUnscaled(canvas.getBitmap(), 0, 0);
+        }
+
+        private void clearOnRunToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (clearOnRunToolStripMenuItem.Checked)
+            {
+                clearOnRunToolStripMenuItem.Checked = false;
+            }
+            else
+            {
+                clearOnRunToolStripMenuItem.Checked = true;
+            }
         }
     }
 }

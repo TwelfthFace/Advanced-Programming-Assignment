@@ -9,7 +9,6 @@ namespace Advanced_Programming_Assignment
     public class Script : Command
     {
         VariableFunction variables = null;
-        string[] keys = { "" };
 
         public Script(System.Windows.Forms.ListBox errBox, Canvas canvas):base(errBox, canvas)
         {
@@ -26,8 +25,6 @@ namespace Advanced_Programming_Assignment
 
             string commands = txtScript.Trim().ToLower();
             string[] lines = commands.Split("\r\n");
-            string substitutedScript = null;
-            string[] substitutedScriptLines = null;
             List<string> commandsToBeExecuted = new List<string>();
 
             foreach(string cmd in lines)
@@ -44,17 +41,27 @@ namespace Advanced_Programming_Assignment
                 }
                 if (cmd.Contains("++"))
                 {
-                    variables.iterateValues(cmd);
+                    variables.iterateValue(cmd);
                     commandsToBeExecuted.Remove(cmd);
                 }
+                if (cmd.Contains('+'))
+                {
+                    if (!cmd[cmd.IndexOf("+")+1].Equals("+")) {
+                        variables.addValues(cmd);
+                        commandsToBeExecuted.Remove(cmd);
+                    }
+                }
             }
-            substitutedScript = variables.substituteValues(commandsToBeExecuted.ToArray());
-            substitutedScriptLines = substitutedScript.Split("\r\n");
+
+            string substitutedScript = variables.substituteValues(commandsToBeExecuted.ToArray());
+            string[] substitutedScriptLines = substitutedScript.Split("\r\n");
             commandsToBeExecuted.Clear();
+
             foreach (string line in substitutedScriptLines)
             {
                 commandsToBeExecuted.Add(line.Trim());
             }
+            
             foreach (string cmd in commandsToBeExecuted.ToArray())
             {
                 string[] spaceSplit = cmd.Trim().Split(" ");
