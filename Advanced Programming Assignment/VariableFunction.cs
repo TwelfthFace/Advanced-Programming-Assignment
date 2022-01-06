@@ -46,6 +46,19 @@ namespace Advanced_Programming_Assignment
 
         public void addValues(string command)
         {
+            foreach (string key in this.getKeys())
+            {
+                if (command.Contains(key + "++"))
+                {
+                    int value = keyValuePairs[key];
+                    int iterator = value+1;
+                    keyValuePairs[key] = iterator;
+                }
+            }
+        }
+
+        public void addValues(string command)
+        {
             List<string> keys = new List<string>();
             foreach(string key in this.getKeys())
             {
