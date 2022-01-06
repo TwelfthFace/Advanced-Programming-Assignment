@@ -22,14 +22,6 @@ namespace Advanced_Programming_Assignment
             this.errBox = errBox;
         }
 
-        public Command(System.Windows.Forms.TextBox txtCmdLine, System.Windows.Forms.ListBox errBox, Canvas canvas)
-        {
-            this.canvas = canvas;
-            this.graphicsContext = canvas.getGraphicsContext();
-            this.draw = new Draw(canvas);
-            this.errBox = errBox;
-        }
-
         /// <summary>
         /// This function takes input as a string and process that string to asertain the command to 
         /// run and the parameters sent. 

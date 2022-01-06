@@ -44,7 +44,7 @@ namespace Advanced_Programming_Assignment
             }
         }
 
-        public void addValues(string command)
+        public void appendValues(string command)
         {
             foreach (string key in this.getKeys())
             {
@@ -57,7 +57,7 @@ namespace Advanced_Programming_Assignment
             }
         }
 
-        public void addValues(string command)
+        public void addValue(string command)
         {
             List<string> keys = new List<string>();
             foreach(string key in this.getKeys())

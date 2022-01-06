@@ -20,7 +20,7 @@ namespace Advanced_Programming_Assignment
             InitializeComponent();
             this.canvas = new Canvas();
             this.g = canvas.getGraphicsContext();
-            this.cmd = new Command(txtCmdLine, lstBoxRanCommands, this.canvas);
+            this.cmd = new Command(lstBoxRanCommands, this.canvas);
             this.script = new Script(lstBoxRanCommands, this.canvas);
             this.ofd.Filter = "txt files (*.txt)|*.txt";
             this.sfd.Filter = "txt files (*.txt)|*.txt";

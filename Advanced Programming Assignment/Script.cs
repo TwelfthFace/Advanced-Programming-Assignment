@@ -8,15 +8,14 @@ namespace Advanced_Programming_Assignment
 {
     public class Script : Command
     {
+        FunctionFactory factory = null;
         VariableFunction variables = null;
-
+        FunctionWhile functionWhile = null;
         public Script(System.Windows.Forms.ListBox errBox, Canvas canvas):base(errBox, canvas)
         {
-            this.canvas = canvas;
-            this.graphicsContext = canvas.getGraphicsContext();
-            this.draw = new Draw(canvas);
             this.errBox = errBox;
-            this.variables = new VariableFunction(errBox, canvas);
+            this.factory = new FunctionFactory(errBox, canvas);
+            this.variables = (VariableFunction)factory.getFunction("variables");
         }
 
         public new bool parser(string txtScript)
@@ -47,7 +46,7 @@ namespace Advanced_Programming_Assignment
                 if (cmd.Contains('+'))
                 {
                     if (!cmd[cmd.IndexOf("+")+1].Equals("+")) {
-                        variables.addValues(cmd);
+                        variables.addValue(cmd);
                         commandsToBeExecuted.Remove(cmd);
                     }
                 }
@@ -62,11 +61,49 @@ namespace Advanced_Programming_Assignment
                 commandsToBeExecuted.Add(line.Trim());
             }
             
-            foreach (string cmd in commandsToBeExecuted.ToArray())
+            for (int i = 0; i < commandsToBeExecuted.Count; i++)
             {
+                string cmd = commandsToBeExecuted[i];
                 string[] spaceSplit = cmd.Trim().Split(" ");
                 switch (spaceSplit[0])
                 {
+                    case "while":
+                        this.functionWhile = (FunctionWhile)factory.getFunction("while");
+                        List<string> whileCommands = new List<string>();
+                        int whileIndex = 0;
+                        int a = 0;
+                        string value = "";
+                        do
+                        {
+                            a++;
+                            whileIndex = commandsToBeExecuted.IndexOf(cmd);
+                            value = commandsToBeExecuted[whileIndex + a];
+                            if (value.Contains("endwhile"))
+                            {
+                                commandsToBeExecuted[whileIndex + a] = "";
+                                break;
+                            }
+                            else {
+                                if (!value.Equals("")){
+                                    whileCommands.Add(value);
+                                    commandsToBeExecuted[whileIndex + a] = "";
+                                }
+                            }
+                        } while (!value.Contains("endwhile"));
+                        foreach (string whileCommand in whileCommands)
+                        {
+                            functionWhile.enumerateCommands(whileCommand);
+                        }
+                        functionWhile.run(commandsToBeExecuted[whileIndex]);
+                        commandsToBeExecuted.RemoveAt(whileIndex + a);
+                        break;
+                    case "reset":
+                        canvas.clearCanvas();
+                        draw.reset();
+                        draw.setFillShapes(false);
+                        draw.setPenColour(Color.Black);
+                        errBox.Items.Clear();
+                        break;
                     default:
                         base.parser(cmd);
                         break;

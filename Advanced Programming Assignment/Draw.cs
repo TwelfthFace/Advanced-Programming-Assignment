@@ -5,9 +5,10 @@ using System.Text;
 
 namespace Advanced_Programming_Assignment
 {
-    public class Draw : Command
+    public class Draw
     {
-
+        protected Graphics graphicsContext;
+        protected Canvas canvas;
         protected Turtle turtle;
         protected bool fillShapes;
         protected Color penColour;
@@ -20,8 +21,6 @@ namespace Advanced_Programming_Assignment
             public int y;
             public Pen turtleColour;
         }
-
-        public Draw() { }
 
         public Draw(Canvas canvas)
         {

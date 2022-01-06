@@ -23,8 +23,10 @@ namespace Advanced_Programming_Assignment
             function = function.ToLower().Trim();
             switch (function)
             {
-                case "for":
-                    return new ForFunction(errBox, this.canvas);
+                case "while":
+                    return new FunctionWhile(errBox, this.canvas);
+                case "variables":
+                    return new VariableFunction(errBox, this.canvas);
                 default:
                     throw new NotImplementedException();
             }

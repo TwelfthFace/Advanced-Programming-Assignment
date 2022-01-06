@@ -5,19 +5,39 @@ using System.Drawing;
 
 namespace Advanced_Programming_Assignment
 {
-    public class ForFunction : Function
+    public class FunctionWhile : Function
     {
-        public override void enumerateCommands(string parameters)
-        {
+        private Script script = null;
 
-            //foreach (string str in parameters)
-            //{
-            //    this.commands.Add(str);
-            //}
+        public override void enumerateCommands(string command)
+        {
+            this.commands.Add(command);
         }
 
         public override bool run(string parameters)
         {
+            string[] command = parameters.Split(" ");
+            switch (command[2])
+            {
+                case ">":
+                    for (int i = Int32.Parse(command[1]); i < Int32.Parse(command[3]); i++)
+                    {
+                        foreach (String cmds in this.commands)
+                        {
+                            script.parser(cmds);
+                        }
+                    }
+                    break;
+                case "<":
+                    for (int i = Int32.Parse(command[1]); i > Int32.Parse(command[3]); i++)
+                    {
+                        foreach (String cmds in this.commands)
+                        {
+                            script.parser(cmds);
+                        }
+                    }
+                    break;
+            }
             //switch (parameters[2])
             //{
             //    case ">":
@@ -50,6 +70,9 @@ namespace Advanced_Programming_Assignment
             //}   
             return false;
         }
-        public ForFunction(System.Windows.Forms.ListBox errBox, Canvas canvas) : base(errBox, canvas) { }
+        public FunctionWhile(System.Windows.Forms.ListBox errBox, Canvas canvas) : base(errBox, canvas) 
+        {
+            this.script = new Script(errBox, canvas);
+        }
     }
 }
