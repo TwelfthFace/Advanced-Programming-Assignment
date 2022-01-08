@@ -12,13 +12,14 @@ namespace Advanced_Programming_Assignment
         public List<string> commands = new List<string>();
         protected System.Windows.Forms.ListBox errBox;
         protected Command cmd;
+        protected Script script;
 
-        protected Function(System.Windows.Forms.ListBox errBox, Canvas canvas)
+        protected Function(System.Windows.Forms.ListBox errBox, Canvas canvas, Script script)
         {
             this.canvas = canvas;
             this.graphicsContext = canvas.getGraphicsContext();
             this.errBox = errBox;
-            this.cmd = new Command(errBox, this.canvas);
+            this.script = script;
         }
 
         public abstract bool run(string parameters);

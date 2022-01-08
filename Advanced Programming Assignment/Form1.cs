@@ -10,7 +10,6 @@ namespace Advanced_Programming_Assignment
     {
         public Canvas canvas = null;
         public Graphics g = null;
-        public Command cmd = null;
         public Script script = null;
         protected OpenFileDialog ofd = new OpenFileDialog();
         protected SaveFileDialog sfd = new SaveFileDialog();
@@ -20,7 +19,6 @@ namespace Advanced_Programming_Assignment
             InitializeComponent();
             this.canvas = new Canvas();
             this.g = canvas.getGraphicsContext();
-            this.cmd = new Command(lstBoxRanCommands, this.canvas);
             this.script = new Script(lstBoxRanCommands, this.canvas);
             this.ofd.Filter = "txt files (*.txt)|*.txt";
             this.sfd.Filter = "txt files (*.txt)|*.txt";
@@ -41,7 +39,7 @@ namespace Advanced_Programming_Assignment
             else {
                 if (txtCmdLine.Text != string.Empty)
                 {
-                    cmd.parser(txtCmdLine.Text);
+                    script.parser(txtCmdLine.Text);
                     txtCmdLine.Text = "";
                 }
             }

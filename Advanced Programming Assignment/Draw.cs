@@ -9,18 +9,12 @@ namespace Advanced_Programming_Assignment
     {
         protected Graphics graphicsContext;
         protected Canvas canvas;
-        protected Turtle turtle;
         protected bool fillShapes;
         protected Color penColour;
         protected Pen pen;
         protected SolidBrush brush;
-
-        protected struct Turtle
-        {
-            public int x;
-            public int y;
-            public Pen turtleColour;
-        }
+        protected int x = 0;
+        protected int y = 0;
 
         public Draw(Canvas canvas)
         {
@@ -30,13 +24,8 @@ namespace Advanced_Programming_Assignment
             this.penColour = Color.Black;
             this.pen = new Pen(penColour, 3);
             this.brush = new SolidBrush(penColour);
-
-            turtle = new Turtle
-            {
-                x = (int)(0 + pen.Width),
-                y = (int)(0 + pen.Width),
-                turtleColour = this.pen
-            };
+            x = (int)(0 + pen.Width);
+            y = (int)(0 + pen.Width);
 
         }
         /// <summary>
@@ -45,7 +34,7 @@ namespace Advanced_Programming_Assignment
         /// <returns>value of turtle.x</returns>
         public int getTurtleX()
         {
-            return turtle.x;
+            return x;
         }
         /// <summary>
         /// Returns the currect Y setting for the pens position.
@@ -53,7 +42,7 @@ namespace Advanced_Programming_Assignment
         /// <returns>value of turtle.y</returns>
         public int getTurtleY()
         {
-            return turtle.y;
+            return y;
         }
 
         /// <summary>
@@ -102,8 +91,8 @@ namespace Advanced_Programming_Assignment
         /// <param name="y"></param>
         public void moveTo(int x, int y)
         {
-            this.turtle.x = x;
-            this.turtle.y = y;
+            this.x = x;
+            this.y = y;
         }
 
         /// <summary>
@@ -112,8 +101,8 @@ namespace Advanced_Programming_Assignment
         /// <param name="z"></param>
         public void moveTo(int z)
         {
-            this.turtle.x += z;
-            this.turtle.y += z;
+            this.x += z;
+            this.y += z;
         }
 
         /// <summary>
@@ -124,7 +113,7 @@ namespace Advanced_Programming_Assignment
         public void drawRectangle(int width, int height)
         {
             Shape rec = new ShapeFactory().getShape("rectangle");
-            rec.set(penColour, this.turtle.x, this.turtle.y, pen.Width, width, height);
+            rec.set(penColour, this.x, this.y, pen.Width, width, height);
             if (!this.getFillShapes())
             { 
                 rec.draw(graphicsContext);
@@ -143,7 +132,7 @@ namespace Advanced_Programming_Assignment
         public void drawCircle(int radius)
         {
             Shape circ = new ShapeFactory().getShape("circle");
-            circ.set(penColour, this.turtle.x, this.turtle.y, pen.Width, radius);
+            circ.set(penColour, this.x, this.y, pen.Width, radius);
             if (!this.getFillShapes())
             {
                 circ.draw(graphicsContext);
@@ -162,7 +151,7 @@ namespace Advanced_Programming_Assignment
         public void drawTriangle(int size)
         {
             Shape tri = new ShapeFactory().getShape("triangle");
-            tri.set(penColour, this.turtle.x, this.turtle.y, pen.Width, size);
+            tri.set(penColour, this.x, this.y, pen.Width, size);
             if (!this.getFillShapes())
             {
                 tri.draw(graphicsContext);
@@ -184,7 +173,7 @@ namespace Advanced_Programming_Assignment
         public void drawTriangle(int a, int b, int c)
         {
             Shape tri = new ShapeFactory().getShape("triangle");
-            tri.set(penColour, this.turtle.x, this.turtle.y, pen.Width, a,b,c);
+            tri.set(penColour, this.x, this.y, pen.Width, a,b,c);
             if (!this.getFillShapes())
             {
                 tri.draw(graphicsContext);
@@ -203,13 +192,13 @@ namespace Advanced_Programming_Assignment
         /// <param name="y"></param>
         public void drawLine(int x, int y)
         {
-            graphicsContext.DrawLine(pen, this.turtle.x, this.turtle.y, this.turtle.x + x, this.turtle.y + y);
+            graphicsContext.DrawLine(pen, this.x, this.y, this.x + x, this.y + y);
         }
 
         public void reset()
         {
-            this.turtle.x = (int)(0 + pen.Width);
-            this.turtle.y = (int)(0 + pen.Width);
+            this.x = (int)(0 + pen.Width);
+            this.y = (int)(0 + pen.Width);
             this.canvas.clearCanvas();
         }
 

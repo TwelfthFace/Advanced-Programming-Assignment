@@ -59,34 +59,23 @@ namespace Advanced_Programming_Assignment
 
         public void addValue(string command)
         {
-            List<string> keys = new List<string>();
-            foreach(string key in this.getKeys())
+            if (command.Contains('='))
             {
-                keys.Add(key.Trim());
-            }
-            foreach (string key in keys)
-            {
-                if (command.Contains(key+" +")){
-                    string op = key;
-                    foreach (string value in keys)
+                string[] commandSplit = command.Split('=');
+                string key = commandSplit[0].Trim();
+                string value = commandSplit[1].Trim();
+                string[] valueSum = value.Split('+');
+                List<string> numbers = new List<string>();
+                foreach (string num in valueSum) {
+                    if (keyValuePairs.ContainsKey(num.Trim()))
                     {
-                        if (value.Equals(op)) {
-                            string[] additionSum = command.Split('+');
-                            string addition = additionSum[1].Trim();
-                            int add = keyValuePairs[op];
-                            int iterator = 0;
-                            if (keys.Contains(addition))
-                            {
-                                iterator = add + keyValuePairs[addition];
-                            }
-                            else
-                            {
-                                iterator = add + int.Parse(addition);
-                            }
-                            keyValuePairs[key] = iterator;
-                        }
+                        numbers.Add(keyValuePairs[num.Trim()].ToString());
+                    }else
+                    {
+                        numbers.Add(num);
                     }
                 }
+                keyValuePairs[key] = int.Parse(numbers[0]) + int.Parse(numbers[1]);
             }
         }
 
@@ -111,12 +100,27 @@ namespace Advanced_Programming_Assignment
             string key = keyValue[0].Trim();
             string value = keyValue[1].Trim();
 
-            if (!keyValuePairs.ContainsKey(key))
+            if (parameters.Contains("+"))
             {
-                keyValuePairs.Add(key, int.Parse(value));
+                addValue(parameters);
             }
+            else
+            {
+                try
+                {
+                    keyValuePairs[key] = int.Parse(value);
+                }
+                catch (Exception e) 
+                {
+                    errBox.Items.Insert(0, "ERROR: " + e.Message + " line: [" + parameters + "]");
+                }  
+
+            }
+            
         }
 
-        public VariableFunction(ListBox errBox, Canvas canvas) : base(errBox, canvas){}
+        public VariableFunction(ListBox errBox, Canvas canvas, Script script):base(errBox, canvas, script)
+        {
+        }
     }
 }

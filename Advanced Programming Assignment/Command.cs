@@ -50,14 +50,12 @@ namespace Advanced_Programming_Assignment
                     if (split.Length > 2)
                     {
                         errBox.Items.Insert(0, "Too many parameters specified! Line: " + txtCmds);
-                        return false;
                     }
                     else
                     {
                         if(!(split[0].Equals("reset") || !(split[0].Equals("end")) || !(split[0].Equals("clear"))))
                         {
                             errBox.Items.Insert(0, "No parameters specified! Line: " + txtCmds);
-                            //return false;
                         }
                     }
                 }
